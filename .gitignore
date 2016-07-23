@@ -1,0 +1,5 @@
+.vs/
+src/Angular2WebpackTemplate/node_modules/
+src/Angular2WebpackTemplate/typings/
+src/Angular2WebpackTemplate/wwwroot/libs/
+src/Angular2WebpackTemplate/wwwroot/appScripts/
