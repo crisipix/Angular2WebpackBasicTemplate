@@ -2,7 +2,7 @@
 var ts = require('gulp-typescript');
 var gulp = require('gulp');
 var clean = require('gulp-clean');
-var webpack = require('gulp-webpack');
+var webpack = require('webpack-stream');
 var destPath = './wwwroot/libs/';
 
 // Delete the dist directory
