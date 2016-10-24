@@ -1,0 +1,88 @@
+   //loggerFactory.AddConsole();
+
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync("Hello World!");
+            //});
+            app.UseStatusCodePages();
+            //app.UseIISPlatformHandler();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
+            //If you’re using Angular 2 with ASP.NET static file serving, you’ll have no doubt run into the fact that once you’ve navigated to 
+            //a different Angular route, you can’t refresh the page. You’ll get a 404 error because the new URL no longer points to a valid file.
+            //Instead we want to route all requests for Angular routes to the root page, usually index.html.Angular will then go figure out which page to load based on the URL.
+            app.Use(async (context, next) =>
+            {
+                await next();
+
+                // If there's no available file and the request doesn't contain an extension, we're probably trying to access a page.
+                // Rewrite request to use app root
+                if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
+                {
+                    context.Request.Path = "/index.html";
+                    await next();
+                }
+            });
+
+            // Serve wwwroot as root
+            app.UseFileServer();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapWebApiRoute("defaultApi",
+                                      "api/{controller}/{id?}");
+            });
+            
+            
+            
+            
+            using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Angular_201_Core_Webkit_Lite_Template.api
+{
+    [Route("api/[controller]")]
+    public class UserController : Controller
+    {
+        public UserController()
+        {
+        }
+
+        [HttpGet]
+        public IEnumerable<User> GetAll()
+        {
+            return new List<User> {
+                new User { Id = 1, Name = "Test 1" },
+                new User { Id = 2, Name = "Test 2" },
+                new User { Id = 3, Name = "Test 3" },
+                new User { Id = 4, Name = "Test 4" }
+            };
+        }
+
+        [HttpGet("{id}", Name = "GetTodo")]
+        public IActionResult GetById(string id)
+        {
+            var item = new User { Id = 1, Name = "Test" };
+            if (item == null)
+            {
+                return NotFound();
+            }
+            return new ObjectResult(item);
+        }
+    }
+
+    public class User
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+}
