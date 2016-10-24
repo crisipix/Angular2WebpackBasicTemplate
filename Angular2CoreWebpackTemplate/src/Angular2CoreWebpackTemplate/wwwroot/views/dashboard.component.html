@@ -1,0 +1,49 @@
+﻿<div class="row">
+    <div class="col-md-12">
+
+    </div>
+
+    <div class='wrapper'>
+        <div class='container' *ngFor='let group of groups' [dragula]='"nested-bag"'>
+            <div *ngFor='let item of group.items' [innerHtml]='item.name'></div>
+        </div>
+        <div class="col-md-4" style="margin:30px,30px,30px,30px">
+            <div clas="container" [dragula]='"newspaper-bag"' [dragulaModel]='posts'>
+                <div *ngFor="let post of posts; #i = index">
+                    <div style="border:solid; border-width:1px; border-color:black; max-width:300px">
+                        <strong>{{post.title}}</strong>
+                        <p>{{post.body}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4" style="margin:30px,30px,30px,30px">
+            <div clas="container" [dragula]='"newspaper-bag"' [dragulaModel]='magazines'>
+                <div *ngFor="let mag of magazines; #i = index">
+                    <div style="border:solid; border-width:1px; border-color:black; max-width:300px">
+                        <strong>{{mag.title}}</strong>
+                        <p>{{mag.body}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4" style="margin:30px,30px,30px,30px; display:inline-block">
+            <div clas="container" [dragula]='"newspaper-bag"' [dragulaModel]='books'>
+                <div *ngFor="let book of books; #i = index">
+                    <div style="border:solid; border-width:1px; border-color:black; max-width:300px">
+                        <strong>{{book.title}}</strong>
+                        <p>{{book.body}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div style="margin:30px,30px,30px,30px">
+            <div clas="container" [dragula]='"newspaper-bag2"' [dragulaModel]='stuff'>
+                <div *ngFor="let item of stuff; #i = index" [innerHtml='item.element']></div>
+            </div>
+        </div>-->
+        <button class="btn btn-default" (click)="savePosition()">Save Position</button>
+        <button class="btn btn-default" (click)="clearStorage()">Clear Storage </button>
+
+    </div>
+</div>

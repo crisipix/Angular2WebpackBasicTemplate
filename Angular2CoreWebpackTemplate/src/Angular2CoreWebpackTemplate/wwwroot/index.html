@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <base href="/">
+
+
+    <meta charset="utf-8" />
+    <title>Angular 2 with ASP.NET Core 1.0</title>
+    <!-- 1. Load libraries -->
+    <link href="libs/css/bootstrap.css" rel="stylesheet" />
+    <link href="libs/css/dragula.css" rel="stylesheet" />
+    <link href="libs/css/font-awesome.css" rel="stylesheet" />
+</head>
+<body>
+    <my-app>Loading...</my-app>
+    <!--<http-test></http-test>-->
+    <script src="libs/core-js/client/core.min.js"></script>
+    <!--<script src="libs/es6-shim/es6-shim.min.js"></script>-->
+    <script src="libs/systemjs/dist/system-polyfills.js"></script>
+    <script src="libs/zone.js/dist/zone.js"></script>
+    <script src="libs/reflect-metadata/Reflect.js"></script>
+    <!--<script src="libs/systemjs/dist/system.src.js"></script>-->
+    <!--<script src="libs/ng2-bootstrap/bundles/ng2-bootstrap.min.js"></script>-->
+    <!-- 2. Configure SystemJS -->
+    <!--<script src="systemjs.config.js"></script>
+    <script>
+
+        System.import('appScripts/boot')
+              .then(null, console.error.bind(console));
+    </script>-->
+    <script src="appscripts/dist/bundle.js"></script>
+</body>
+</html>

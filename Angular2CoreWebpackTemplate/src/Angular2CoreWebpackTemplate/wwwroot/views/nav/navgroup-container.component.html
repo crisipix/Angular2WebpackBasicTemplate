@@ -1,0 +1,20 @@
+﻿<div class="collapsed-nav-menu-area"
+     *ngIf="isMenuButtonVisible" (click)="menuClicked()">
+    <button type="button" class="btn btn-default nav-button"><i class="fa fa-bars"></i></button>
+</div>
+<div (window:resize)="onResize($event)">
+    <div class="nav-menu-area" *ngIf="isNavVisible" [ngClass]="{'nav-menu-area-vertical' : isVertical, 'nav-menu-area-horizontal' : !isVertical}">
+        <ul class="nav-group">
+            <li [ngClass]="{'nav-item-horizontal-left': !isVertical}">
+                <img class="logo" src="../views/images/Avatar.svg" style="width:50px; height:40px" />
+            </li>
+            <li>
+                <nav-group [navconfig]=leftConfig [isVertical]="isVertical" (navClick)="onNavClick($event)" (groupInit)="onNavGroupClick($event)"></nav-group>
+            </li>
+            <li>
+                <nav-group [navconfig]=rightConfig [isVertical]="isVertical" (navClick)="onNavClick($event)" (groupInit)="onNavGroupClick($event)"></nav-group>
+            </li>
+        </ul>
+    </div>
+    <!--<button type="button" (click)="toggleOrientation()">TOGGLE</button>-->
+</div>

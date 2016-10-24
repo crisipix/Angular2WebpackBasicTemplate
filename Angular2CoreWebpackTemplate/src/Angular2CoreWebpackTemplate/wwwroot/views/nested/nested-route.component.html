@@ -1,0 +1,28 @@
+﻿<div class="col-md-10">
+    <spinner [showSpinner]="loadingUser"></spinner>
+    <div class="panel panel-default">
+        
+        <div class="panel-heading">Nested Routing</div>
+        <div class="panel-body">
+            
+            Promised User : {{user?.name}} is logged in.
+            Observable User : {{user_o?.name}} is logged in.
+
+            <div class="list-group">
+                <a class="list-group-item" [routerLink]="['Default']">Default</a>
+                <a class="list-group-item" [routerLink]="['Drag']">Drag</a>
+                <a class="list-group-item" [routerLink]="['SubHttpTest']">Http Test</a>
+            </div>
+            <!--The route will not even show if the user doesn't exist this will prevent loading another service call without
+            the user. but is also good to have the dependent service call the user service if the user is still null.
+                doing this guarantees that the user will exist before the dependent service is triggered by onInit.
+            <div class="panel panel-default" *ngIf="user">
+               however im going to leave the checks in place. 
+                -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">Sub Route</div>
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+    </div>
+</div>

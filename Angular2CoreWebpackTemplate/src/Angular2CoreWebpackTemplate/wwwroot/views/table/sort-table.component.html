@@ -1,0 +1,23 @@
+﻿<div>
+    <div class="panel-body">
+        Sort
+        <search-box (update)="filter = $event"></search-box>
+        <new-record [status]="newRecordStatus" [model]="model" [validators]="validators" [asyncValidators]="asyncValidators"
+                    (submitAdd)="onSubmitAdd()"
+                    (update)="onModelUpdate($event)"></new-record>
+
+                <table style="min-width:600px;">
+                    <tr>
+                        <th *ngFor="let col of columns" (click)="sortColumn(col.name)">
+                            {{col.name}}
+                        </th>
+                    </tr>
+                    <tr *ngFor="let row of rows | search:filter">
+                        <td *ngFor="let col of columns">
+                            {{row[col.name]}}
+                        </td>
+                    </tr>
+
+                </table>
+    </div>
+</div>

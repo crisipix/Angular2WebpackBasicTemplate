@@ -1,0 +1,32 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <h1>The News {{input}}</h1>
+        <ul class="">
+            <li *ngFor="let post of posts">
+                {{post.title}}
+            </li>
+        </ul>
+
+        <ul class="">
+            <li *ngFor="let item of news">
+                <a href="{{item.link}}" target="_blank">{{item.title}}</a>
+            </li>
+        </ul>
+    </div>
+    <div bsModal #smNewsModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" (click)="smModal.hide()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Configure News</h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                    <div (click)="ChangeName()">Change Name</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

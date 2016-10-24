@@ -1,0 +1,39 @@
+﻿<div>
+    <div class="panel-body">
+        Hello
+        <table style="min-width:600px;">
+            <tr>
+                <th>Column A</th>
+                <th>Column B</th>
+            </tr>
+            <tr>
+                <td>A</td>
+                <td>B</td>
+            </tr>
+            <tr>
+                <!--<td><input class="form-control" type="text" [(ngModel)]="tableData" (keyup)="handleChange()" (change)="handleChange()"/></td>-->
+                <td><textarea class="form-control" id="textArea" [(ngModel)]="tableData" (keyup)="handleChange($event)"></textarea></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <label class="control-label" for="focusedInput">Focused input</label>
+                        <input class="form-control" id="focusedInput" type="text" value="This is focused...">
+                    </div>
+                </td>
+                <td></td>
+            </tr>
+            <tr *ngFor="let row of rrows">
+                <td *ngFor="let col of row.columns"><input [ngModel]="col"/></td>
+            </tr>
+
+        </table>
+        <div class="form-group">
+            <label class="control-label" for="focusedInput">Focused input</label>
+            <input class="form-control" id="focusedInput" type="text" value="This is focused...">
+            <textarea class="form-control" id="textArea">
+                
+            </textarea>
+        </div>
+    </div>
+</div>

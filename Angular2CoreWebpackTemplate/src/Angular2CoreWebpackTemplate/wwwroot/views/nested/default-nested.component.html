@@ -1,0 +1,8 @@
+﻿<div class="col-md-10" style="min-height:150px;">
+    <spinner [showSpinner]="loadingPosts"></spinner>
+    <div>Users Posts</div>
+    <ul>
+        <li *ngFor="let p of userPosts">p - {{p.title}}</li>
+        <li *ngFor="let p of userPosts_o">o - {{p.title}}</li>
+    </ul>
+</div>

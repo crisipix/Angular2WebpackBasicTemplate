@@ -28,6 +28,20 @@ export class AppComponent implements OnInit {
             news => console.log(news),
             error => console.log(error));
         //this._service.getNews.then(response => console.log(response)).catch(error => console.log(error));
+
+        this._service.getAppInfoPromise().then(r => {
+            console.log('app info promise results');
+            console.log(r);
+        });
+
+        this._service.getAppInfoObser()
+            .subscribe(data => {
+                console.log('app info observable results');
+                console.log(data);
+            },
+            error => { });
     }
+
+    
 
 }

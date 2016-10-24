@@ -3,3 +3,17 @@ src/Angular2WebpackTemplate/node_modules/
 src/Angular2WebpackTemplate/typings/
 src/Angular2WebpackTemplate/wwwroot/libs/
 src/Angular2WebpackTemplate/wwwroot/appScripts/
+Angular201CoreWebpack/src/Angular201CoreWebpack/node_modules/
+Angular201CoreWebpack/src/Angular201CoreWebpack/project.lock.json
+Angular201CoreWebpack/src/Angular201CoreWebpack/typings/
+Angular201CoreWebpack/src/Angular201CoreWebpack/wwwroot/appScripts/
+Angular201CoreWebpack/src/Angular201CoreWebpack/wwwroot/libs/
+Angular2CoreWebpackTemplate/src/Angular2CoreWebpackTemplate/bin/
+Angular2CoreWebpackTemplate/src/Angular2CoreWebpackTemplate/node_modules/
+Angular2CoreWebpackTemplate/src/Angular2CoreWebpackTemplate/obj/
+Angular2CoreWebpackTemplate/src/Angular2CoreWebpackTemplate/project.lock.json
+Angular2CoreWebpackTemplate/src/Angular2CoreWebpackTemplate/typings/
+Angular2CoreWebpackTemplate/src/Angular2CoreWebpackTemplate/wwwroot/appScripts/
+Angular2CoreWebpackTemplate/src/Angular2CoreWebpackTemplate/wwwroot/libs/
+Angular201CoreWebpack/src/Angular201CoreWebpack/obj/
+Angular201CoreWebpack/src/Angular201CoreWebpack/bin/
