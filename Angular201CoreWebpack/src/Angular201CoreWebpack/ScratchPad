@@ -86,3 +86,81 @@ namespace Angular_201_Core_Webkit_Lite_Template.api
         public string Name { get; set; }
     }
 }
+
+
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+
+import { NavGroupContainerComponent } from './navgroup-container.component';
+import { NavGroupComponent } from './navgroup.component';
+
+import { NavService } from './services/nav.service';
+ 
+
+@NgModule(
+    {
+        imports: [CommonModule],
+        declarations: [NavGroupContainerComponent, NavGroupComponent],
+        exports: [NavGroupContainerComponent, NavGroupComponent],
+        providers: [
+            { provide: NavService, useClass: NavService }
+        ]
+    }
+)
+
+export class NavGroupModule {
+
+}
+
+
+
+import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { HttpModule } from '@angular/http';
+
+import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { DragulaModule } from 'ng2-dragula/ng2-dragula';
+import { AppComponent } from './app.component';
+import { SampleComponent } from './sample/sample.component';
+import { NavGroupModule } from './nav/navgroup.module';
+
+//import { LogoComponent } from './common/images/logo.component';
+//import { TextImageGenComponent } from './common/images/txt-image.component';
+import { SpinnerComponent } from './common/images/spinner.component';
+import { ProfileComponent } from './user/profile.component';
+import { SettingsComponent } from './user/settings.component';
+
+import { BaseService } from './common/services/base.service';
+import { UserService } from './user/services/user.service';
+
+@NgModule({
+    imports: [
+        BrowserModule,
+        HttpModule,
+        Ng2BootstrapModule,
+        DragulaModule,
+        NavGroupModule,
+        RouterModule.forRoot([
+            { path: '', redirectTo: 'sample', pathMatch: 'full'},
+            { path: 'sample', component: SampleComponent },
+            { path: 'profile', component: ProfileComponent },
+            { path: 'settings', component: SettingsComponent }
+        ])
+    ],
+    declarations: [
+        AppComponent,
+        SampleComponent,
+        ProfileComponent,
+        SettingsComponent
+        ],
+    providers: [BaseService,  UserService],
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+
+export class AppModule { }
+
+
