@@ -1,4 +1,6 @@
 ﻿<div (click)="onClick()">
+    <i *ngIf="!node.isCollapsed && node.children?.length > 0" class="fa fa-plus"></i>
+    <i *ngIf="node.isCollapsed && node.children?.length > 0" class="fa fa-minus"></i>
     {{node?.name}}
     {{node.children?.length}}
 </div>
