@@ -1,0 +1,10 @@
+﻿<div (click)="onClick()">
+    {{node?.name}}
+    {{node.children?.length}}
+</div>
+<ul *ngIf="node.isCollapsed">
+    <li *ngFor="let child of node.children">
+        <!--{{child.name}}-->
+        <tree [node]="child"></tree>
+    </li>
+</ul>

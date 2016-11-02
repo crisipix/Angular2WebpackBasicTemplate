@@ -3,27 +3,22 @@ import {TreeNode} from './models/node';
 
 @Component({
     selector: 'tree',
-    template: `{{node?.name}}
-{{node.children?.length}}
-<ul>
-    <li *ngFor="let child of node.children">
-        {{child.name}}
-    </li>
-</ul>
-`
-
-
+    templateUrl:'./views/tree/tree.component.html'
 })
 export class TreeComponent implements OnInit{
     @Input() node: TreeNode;
 
     constructor() {
 
-
     }
 
     ngOnInit()
     {
         console.log(`Tree ${this.node.name}`);
+    }
+
+    onClick()
+    {
+        this.node.isCollapsed = !this.node.isCollapsed;
     }
 }
