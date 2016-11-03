@@ -1,0 +1,21 @@
+﻿
+<div>
+    Tagging
+    <div>
+        <ul *ngFor="let person of people | matchingTags:selectedTag:tagCache">
+            <li>
+                <b>{{person.name }}</b>
+                <ul *ngFor="let tag of person.tags">
+                    <li>{{tag.name }}</li>
+                </ul>
+            </li>
+        </ul>
+
+        <div *ngFor="let t of tags">
+            <div (click)="selectTag(t)">
+                {{t.name }}
+                {{ tagCache[t.name] | json }}
+            </div>
+        </div>
+    </div>
+</div>
