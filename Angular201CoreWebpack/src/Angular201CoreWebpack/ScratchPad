@@ -164,3 +164,144 @@ import { UserService } from './user/services/user.service';
 export class AppModule { }
 
 
+//////////////////////////////////////////////////////////////////////////////////////
+
+import { Component, OnInit } from '@angular/core';
+import { Person } from './model/person';
+import { Tag } from './model/tag';
+
+@Component({
+
+    selector: 'tagging',
+    templateUrl: './views/tagging/tagging.component.html',
+})
+
+export class TaggingComponent implements OnInit
+{
+    people: Array<Person>;
+    tagCache: any = {};
+    tags: Array<Tag> = new Array<Tag>();
+    selectedTag: Tag;
+    constructor()
+    {
+        this.people = [
+            new Person('A', [new Tag('Cool'), new Tag('Smart')]),
+            new Person('B', [new Tag('Smart')]),
+            new Person('C', [new Tag('Cool')]),
+            new Person('D', [new Tag('Weird')]),
+            new Person('E', [])
+        ];
+
+        this.getAllTags(this.people);
+    }
+
+    ngOnInit()
+    { }
+
+    selectTag(tag)
+    {
+        this.selectedTag = tag;
+    }
+    getAllTags(people: Array<Person>)
+    {
+        for (let p in people)
+        {
+            let person = people[p];
+            let tags = person.tags
+            for (let t in tags)
+            {
+                let tag = tags[t];
+                if (!this.tagCache[tag.name]) {
+                    this.tagCache[tag.name] = [person];
+                    this.tags.push(tag);
+                }
+                else {
+                    this.tagCache[tag.name].push(person);
+                }
+            }
+        }
+    }
+}
+
+
+import { Injectable, Pipe, PipeTransform } from '@angular/core';
+
+import { Person } from '../model/person';
+import { Tag } from '../model/tag';
+
+@Pipe({ name: 'matchingTags' })
+@Injectable()
+export class MatchingTagsPipe implements PipeTransform {
+
+    transform(people: Array<Person>, tag: Tag, tagCache : any) {
+        if (!tag || !tagCache) {
+            return people;
+        }
+
+        return people.filter(p => this.findPerson(p.name, tag, tagCache));
+    }
+
+    findPerson(name, tag, tagCache) {
+        if (!tag || !tagCache) {
+            return true;
+        }
+
+        let taggedPeople: Array<Person> = tagCache[tag.name];
+
+        if (!taggedPeople) { return false; }
+
+        for (let tp in taggedPeople)
+        {
+            if (taggedPeople[tp].name === name)
+            { return true;}
+        }
+        return false;
+
+    }
+}
+
+import { Tag } from './tag';
+
+export class Person
+{
+    name: string;
+    tags: Array<Tag>;
+
+    constructor(name, tags) {
+        this.name = name;
+        this.tags = tags;
+    }
+}
+
+
+export class Tag
+{
+    name: string;
+
+    constructor(name)
+    {
+        this.name = name;
+
+    }
+}
+
+<div>
+    Tagging
+    <div>
+        <ul *ngFor="let person of people | matchingTags:selectedTag:tagCache">
+            <li>
+                <b>{{person.name}}</b>
+                <ul *ngFor="let tag of person.tags">
+                    <li>{{tag.name}}</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <div *ngFor="let t of tags">
+            <div (click)="selectTag(t)">
+                {{t.name}}
+                {{tagCache[t.name] | json}}
+            </div>
+        </div>
+    </div>
+    </div>
