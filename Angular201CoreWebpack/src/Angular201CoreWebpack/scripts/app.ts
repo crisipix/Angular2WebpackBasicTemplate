@@ -8,13 +8,16 @@ import {TreeNode} from './tree/models/node';
 })
     
 
-export class AppComponent {
+export class AppComponent{
     title: string;
     rootNode: TreeNode;
+    url: string;
+    globalConfig: GlobalConfig;
     public constructor(private viewContainerRef: ViewContainerRef) {
         // You need this small hack in order to catch application root view container ref
         this.viewContainerRef = viewContainerRef;
-
+        this.url = PROD_API_URL;
+        this.globalConfig = new GlobalConfig();
         this.title = 'Title Angular 2.1 Core';
         //this.node.name = 'Tree House';
         let children : Array<TreeNode> = 
@@ -43,5 +46,24 @@ export class AppComponent {
         ];
         this.rootNode = new TreeNode('Tree House', children);
         console.log(this.rootNode);
+    }
+}
+
+// Extra variables that live on Global that will be replaced by webpack DefinePlugin
+declare var API_URL: string;
+declare var PROD_API_URL: string;
+
+export interface GlobalEnvironment {
+    API_URL: string;
+    PROD_API_URL: string;
+}
+
+export class GlobalConfig implements GlobalEnvironment
+{
+    API_URL: string;
+    PROD_API_URL: string;
+    constructor() {
+        this.API_URL = API_URL;
+        this.PROD_API_URL = PROD_API_URL;
     }
 }
