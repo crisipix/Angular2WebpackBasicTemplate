@@ -48,6 +48,11 @@ gulp.task('webpack_build', function () {
    .pipe(webpack(require('./webpack.config.js')))
    .pipe(gulp.dest('./wwwroot/appScripts/dist'));
 });
+gulp.task('webpack_build_prod', function () {
+    return gulp.src('scripts/boot.ts')
+   .pipe(webpack(require('./webpack.prod.config.js')))
+   .pipe(gulp.dest('./wwwroot/appScripts/dist'));
+});
 
 var tsProject = ts.createProject('scripts/tsconfig.json');
 gulp.task('ts', function (done) {
