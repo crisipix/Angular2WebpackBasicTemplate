@@ -1,6 +1,6 @@
 ﻿import {Component, Input, OnInit} from '@angular/core';
 import {TreeNode} from './models/node';
-import { GlobalConfig } from '../app';
+import { GlobalConfig } from '../global.config';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class TreeComponent implements OnInit {
     
     constructor() {
         this.globalConfig = new GlobalConfig();
-        this.environment = this.globalConfig.PROD_API_URL;
+        this.environment = this.globalConfig.Environment;
     }
 
     ngOnInit()

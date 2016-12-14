@@ -1,6 +1,6 @@
 ﻿import {Component, ViewContainerRef} from '@angular/core';
 import {TreeNode} from './tree/models/node';
-
+import {GlobalConfig} from './global.config';
 @Component({
     selector: 'my-app',
     templateUrl: './views/appView.html',
@@ -16,7 +16,8 @@ export class AppComponent{
     public constructor(private viewContainerRef: ViewContainerRef) {
         // You need this small hack in order to catch application root view container ref
         this.viewContainerRef = viewContainerRef;
-        this.url = PROD_API_URL;
+        this.globalConfig = new GlobalConfig();
+        this.url = this.globalConfig.Environment;
         this.globalConfig = new GlobalConfig();
         this.title = 'Title Angular 2.1 Core';
         //this.node.name = 'Tree House';
@@ -49,21 +50,3 @@ export class AppComponent{
     }
 }
 
-// Extra variables that live on Global that will be replaced by webpack DefinePlugin
-declare var API_URL: string;
-declare var PROD_API_URL: string;
-
-export interface GlobalEnvironment {
-    API_URL: string;
-    PROD_API_URL: string;
-}
-
-export class GlobalConfig implements GlobalEnvironment
-{
-    API_URL: string;
-    PROD_API_URL: string;
-    constructor() {
-        this.API_URL = API_URL;
-        this.PROD_API_URL = PROD_API_URL;
-    }
-}
