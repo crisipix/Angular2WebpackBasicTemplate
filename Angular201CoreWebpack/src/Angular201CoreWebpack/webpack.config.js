@@ -8,7 +8,7 @@ const DefinePlugin = require('./node_modules/webpack/lib/DefinePlugin');
  * Webpack Constants
  */
 const Environment = 'localhost';
-const PROD_API_URL = 'production';
+const API_URL = 'http://dev.api.com';
 
 
 module.exports = {
@@ -39,7 +39,7 @@ module.exports = {
        // NOTE: when adding more properties, make sure you include them in custom-typings.d.ts
        new DefinePlugin({
         'Environment': JSON.stringify(Environment),
-        'PROD_API_URL': JSON.stringify(PROD_API_URL)
+        'API_URL': JSON.stringify(API_URL)
 
        }),
     ]

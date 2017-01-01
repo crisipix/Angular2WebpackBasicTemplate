@@ -3,7 +3,7 @@
     <i *ngIf="node.isCollapsed && node.children?.length > 0" class="fa fa-minus"></i>
     {{node?.name}}
     {{node.children?.length}}
-    <h4>Global Service Info : {{environment}}</h4>
+    <!--<h4>Global Service Info : {{environment}}</h4>-->
 </div>
 <ul *ngIf="node.isCollapsed">
     <li *ngFor="let child of node.children">

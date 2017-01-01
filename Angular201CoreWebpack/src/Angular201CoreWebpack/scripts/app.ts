@@ -17,8 +17,8 @@ export class AppComponent{
         // You need this small hack in order to catch application root view container ref
         this.viewContainerRef = viewContainerRef;
         this.globalConfig = new GlobalConfig();
-        this.url = this.globalConfig.Environment;
-        this.globalConfig = new GlobalConfig();
+        //this.url = this.globalConfig.Environment;
+        this.url = this.globalConfig.API_URL;
         this.title = 'Title Angular 2.1 Core';
         //this.node.name = 'Tree House';
         let children : Array<TreeNode> = 
