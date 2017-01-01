@@ -5,15 +5,18 @@ import { GlobalConfig } from '../global.config';
 
 @Component({
     selector: 'tree',
-    templateUrl: './views/tree/tree.component.html'
+    templateUrl: './views/tree/tree.component.html',
+    providers: [GlobalConfig]
+
 })
 export class TreeComponent implements OnInit {
     @Input() node: TreeNode;
     globalConfig: GlobalConfig;
     environment: string;
-    
-    constructor() {
-        this.globalConfig = new GlobalConfig();
+
+    constructor(globalConfig: GlobalConfig) {
+        //this.globalConfig = new GlobalConfig();
+        this.globalConfig = globalConfig;
         this.environment = this.globalConfig.Environment;
     }
 

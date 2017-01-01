@@ -1,4 +1,7 @@
-﻿// Extra variables that live on Global that will be replaced by webpack DefinePlugin
+﻿import {Injectable} from '@angular/core';
+
+
+// Extra variables that live on Global that will be replaced by webpack DefinePlugin
 declare var Environment: string;
 declare var API_URL: string;
 
@@ -7,6 +10,7 @@ export interface GlobalEnvironment {
     API_URL: string;
 }
 
+@Injectable()
 export class GlobalConfig implements GlobalEnvironment {
     Environment: string;
     API_URL: string;
