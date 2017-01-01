@@ -2,11 +2,13 @@
 import {TreeNode} from './models/node';
 import { GlobalConfig } from '../global.config';
 
-
+// If you would rather have one instance per component, 
+// use the providers array in the component's configuration object instead
+// I only want it coming from the top level so I'll coment it out. 
 @Component({
     selector: 'treeroot',
     templateUrl: './views/tree/tree-root.component.html',
-    providers: [GlobalConfig]
+    //providers: [GlobalConfig]
 })
 export class TreeRootComponent implements OnInit {
     rootNode: TreeNode;
@@ -50,6 +52,4 @@ export class TreeRootComponent implements OnInit {
     ngOnInit() {
         console.log();
     }
-
-    
 }

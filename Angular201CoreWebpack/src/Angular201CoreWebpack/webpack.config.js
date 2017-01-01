@@ -41,7 +41,7 @@ module.exports = {
         'Environment': JSON.stringify(Environment),
         'API_URL': JSON.stringify(API_URL)
 
-       }),
+       })
     ]
 
 };
