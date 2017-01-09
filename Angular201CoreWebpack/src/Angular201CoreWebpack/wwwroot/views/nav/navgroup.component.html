@@ -1,0 +1,29 @@
+﻿<ul class="nav-group">
+    <li *ngFor="let navgroup of navconfig" [ngClass]="navgroup.isPushedRight(isVertical)">
+        <div class="nav-group-div" *ngIf="!navgroup.isRoot" (click)="navgroup.toggle();">
+            <i class="fa {{navgroup.icon}} nav-menu-icon"></i>
+            <strong>{{ navgroup.name }}</strong>
+            <i class="fa fa-chevron-left nav-group-expanded" *ngIf="!navgroup.isRoot" [ngClass]="{'fa-rotate-270': navgroup.expanded }"></i>
+        </div>
+        <div *ngIf="navgroup.expanded" [ngClass]="{'nav-popup-menu' : !isVertical && !navgroup.isRoot}">
+            <ul>
+                <li class="nav-item" *ngFor="let nav of navgroup.navs"
+                    [ngClass]="{'nav-item-horizontal': !isVertical && !navgroup.isRoot,
+                                'nav-root-item-horizontal' : !isVertical && navgroup.isRoot}">
+                    <div class="nav-item-div nav-noselect" (click)="navigate(navgroup.name, nav.link, nav); nav.select();"
+                         [ngClass]="{'nav-item-div-selected' : nav.isSelected && isVertical, 'nav-item-div-selected-horizontal' : nav.isSelected && !isVertical}">
+                        <i class="fa {{nav.icon}} nav-menu-icon"></i>
+                        <!--<a [routerLink]="[nav.link]">{{nav.name}}</a>-->
+                        {{nav.name}}
+                    </div>
+                </li>
+            </ul>
+            <nav-group class="nav-subgroup nav-noselect"
+                       [navgroup]="navgroup"
+                       [navconfig]="navgroup.navgroups"
+                       [isVertical]="isVertical"
+                       (navClick)="onNavClick($event)"
+                       (groupInit)="onNavGroupClick($event)"></nav-group>
+        </div>
+    </li>
+</ul>

@@ -9,7 +9,7 @@ import {GlobalConfig} from './global.config';
 })
 
 
-// If you only want one instance of NameService across your entire app (i.e., Singleton), 
+// If you only want one instance of the Global Config across your entire app (Singleton), 
 // then include it in the providers array of your root component
 export class AppComponent{
     title: string;
