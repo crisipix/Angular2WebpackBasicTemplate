@@ -2,7 +2,7 @@
  * Webpack Plugins
  */
 const DefinePlugin = require('./node_modules/webpack/lib/DefinePlugin');
-
+const HtmlWebpackPlugin = require('./node_modules/webpack-html-plugin');
 
 /**
  * Webpack Constants
@@ -15,7 +15,8 @@ module.exports = {
     //entry: "./scripts/boot",
     output: {
         path: __dirname,
-        filename: 'bundle.js'
+        filename: './appScripts/dist/234.dev.bundle.js',
+        //filename: 'bundle.js'
         //filename: './wwwroot/appScripts/dist/bundle.js'
     },
     devtool:'source-map',
@@ -41,7 +42,14 @@ module.exports = {
         'Environment': JSON.stringify(Environment),
         'API_URL': JSON.stringify(API_URL)
 
-       })
+       }),
+        new HtmlWebpackPlugin({
+            path: __dirname + '/wwwroot',
+            filename: 'index.html',
+            inject: 'body',
+            template: 'wwwroot/template.html'
+        }),
+
     ]
 
 };

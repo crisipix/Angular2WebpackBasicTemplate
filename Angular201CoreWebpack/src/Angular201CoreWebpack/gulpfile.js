@@ -46,12 +46,13 @@ gulp.task("scriptsNStyles", () => {
 gulp.task('webpack_build', function () {
     return gulp.src('scripts/boot.ts')
    .pipe(webpack(require('./webpack.config.js')))
-   .pipe(gulp.dest('./wwwroot/appScripts/dist'));
+   .pipe(gulp.dest('./wwwroot'))
+    ;
 });
 gulp.task('webpack_build_prod', function () {
     return gulp.src('scripts/boot.ts')
    .pipe(webpack(require('./webpack.prod.config.js')))
-   .pipe(gulp.dest('./wwwroot/appScripts/dist'));
+   .pipe(gulp.dest('./wwwroot'));
 });
 
 var tsProject = ts.createProject('scripts/tsconfig.json');
