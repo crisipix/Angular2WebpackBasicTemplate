@@ -24,7 +24,7 @@
     "zone.js": "^0.6.25",
     "font-awesome": "^4.6.3",
     "moment": "^2.13.0",
-    "webpack": "^1.13.1"
+      "webpack": "1.13.2"
   },
   "devDependencies": {
     "typescript": "^2.0.3",

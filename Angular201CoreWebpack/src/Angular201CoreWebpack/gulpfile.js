@@ -45,9 +45,16 @@ gulp.task("scriptsNStyles", () => {
 
 gulp.task('webpack_build', function () {
     return gulp.src('scripts/boot.ts')
+    //.pipe(webpack({
+    //    entry: {
+    //        app: './wwwroot/libs/reflect-metadata/Reflect.js',
+    //    },
+    //    output: {
+    //        filename: './wwwroot/appScripts/dist/vendor.js',
+    //    },
+    //}))
    .pipe(webpack(require('./webpack.config.js')))
-   .pipe(gulp.dest('./wwwroot'))
-    ;
+   .pipe(gulp.dest('./wwwroot'));
 });
 gulp.task('webpack_build_prod', function () {
     return gulp.src('scripts/boot.ts')
