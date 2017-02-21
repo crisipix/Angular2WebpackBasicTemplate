@@ -3,7 +3,7 @@
 
 @Component({
     selector: 'txt-img-gen',
-    templateUrl: './views/images/text-image-gen.component.html'
+    templateUrl: './views/common/images/text-image-gen.component.html'
 })
 
 //http://lea.verou.me/2013/03/easily-center-text-vertically-with-svg/

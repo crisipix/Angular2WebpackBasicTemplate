@@ -6,7 +6,9 @@
     <div class="nav-menu-area" *ngIf="isNavVisible" [ngClass]="{'nav-menu-area-vertical' : isVertical, 'nav-menu-area-horizontal' : !isVertical}">
         <ul class="nav-group">
             <li [ngClass]="{'nav-item-horizontal-left': !isVertical}">
-                <img class="logo" src="../views/common/images/Avatar.svg" style="width:50px; height:40px" />
+                <!--<img class="logo" src="../views/common/images/Avatar.svg" style="width:50px; height:40px" />
+                <img-gen rect-color="red" text-value="CCW" text-color="black" style="width:50px; height:40px"></img-gen>-->
+                <txt-img-gen rect-color="red" text-value="CW" text-color="black" width="50px" height="40px"></txt-img-gen>
             </li>
             <li>
                 <nav-group [navconfig]=leftConfig [isVertical]="isVertical" (navClick)="onNavClick($event)" (groupInit)="onNavGroupClick($event)"></nav-group>

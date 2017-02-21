@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { NavGroupComponent } from './navgroup.component';
 import {NavGroup} from './navgroup';
 import {Nav} from './nav';
+//import {ImageGenComponent} from '../common/images/image-gen.component';
+
 
 @Component({
     selector: 'navgroup-container',

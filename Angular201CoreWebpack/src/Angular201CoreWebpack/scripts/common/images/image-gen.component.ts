@@ -3,7 +3,7 @@
 
 @Component({
     selector: 'img-gen',
-    templateUrl: './views/images/image-gen.component.html'
+    templateUrl: './views/common/images/image-gen.component.html'
 })
 
 export class ImageGenComponent implements OnInit
