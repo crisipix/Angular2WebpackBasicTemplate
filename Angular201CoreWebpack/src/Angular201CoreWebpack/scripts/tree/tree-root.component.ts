@@ -1,4 +1,5 @@
-﻿import {Component, Input, OnInit} from '@angular/core';
+﻿import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
+import { FormControl }            from '@angular/forms';
 import {TreeNode} from './models/node';
 import { GlobalConfig } from '../global.config';
 
@@ -14,12 +15,33 @@ export class TreeRootComponent implements OnInit {
     rootNode: TreeNode;
     globalConfig: GlobalConfig;
     environment: string;
+    @Input() filter: string;
+    @Output() update: EventEmitter<any>;
+    items: Array<any>;
+    //constructor() {
+    //    this.toggleFilter = new EventEmitter<any>();
+    //}
+
+    //ngOnInit() {
+    //    this.inputFilter.nativeElement.focus();
+    //}
+
+    //toggleFilterIdeas() {
+    //    this.toggleFilter.emit('');
+    //}
 
     constructor(globalConfig: GlobalConfig) {
         this.globalConfig = globalConfig;
         //this.globalConfig = new GlobalConfig();
         this.environment = this.globalConfig.Environment;
-
+        this.update = new EventEmitter<any>();
+        this.items = [{ code: '1A', desc: '1A' },
+            { code: '2A', desc: '2A' },
+            { code: '3A', desc: '3A' },
+            { code: '4A', desc: '4A' },
+            { code: '5B', desc: '5B' }
+            ];
+        this.filter = 'A';
         //this.node.name = 'Tree House';
         let children: Array<TreeNode> =
         [

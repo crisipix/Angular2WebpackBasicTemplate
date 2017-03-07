@@ -2,3 +2,13 @@
 <h4>Service Info : {{globalConfig.Environment}}</h4>
 <h4>Service URL Info : {{globalConfig.API_URL}}</h4>
 <tree [node]="rootNode"></tree>
+<!--<input #inputFilter type="text" class="form-control" name="inputFilter" [(ngModel)]="filter" placeholder="Filter" (input)="update.emit(inputFilter.value)">-->
+<div class="form-group">
+    <label>Last Name</label>
+    <input type="text" class="form-control" placeholder="Filter" name="inputFilter" ngModel required>
+</div>
+<ul>
+    <li *ngFor="let item of items | search:filter">
+        <div>{{item.code}}</div>
+    </li>
+</ul>
