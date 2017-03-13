@@ -1,0 +1,25 @@
+﻿<div class="container">
+    <h1>User Info Template Driven Form</h1>
+    <form #userTemplateForm="ngForm" (ngSubmit)="onSubmit(userTemplateForm.value)">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" name="name" [(ngModel)] ="user.name"/>
+
+            <label>Email</label>
+            <input type="text" class="form-control" name="email" [(ngModel)] ="user.email"/>
+            <div ngModelGroup="address">
+                <label>Street</label>
+                <input type="text" class="form-control" name="street" ngModel />
+
+                <label>City</label>
+                <input type="text" class="form-control" name="city" ngModel />
+
+                <label>Zip Code</label>
+                <input type="text" class="form-control" name="zipcode" ngModel />
+
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>

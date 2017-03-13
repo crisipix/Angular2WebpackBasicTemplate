@@ -75,20 +75,19 @@ export class NavGroupContainerComponent implements OnInit {
                 name: 'Root', navs:
                 [
                     { name: 'Home', link: 'tagging' },
-                    { name: 'Form', link: 'tree' },
+                    { name: 'Tree', link: 'tree' },
                     { name: 'Dashboard', link: 'tagging' },
                 ],
                 navgroups: [
                     {
-                        name: 'Widgets', navs: [
-                            { name: 'Widgets', link: 'Widgets', icon: 'fa-edit' },
+                        name: 'Main Items', navs: [
                             { name: 'Submission State', link: 'SubmissionState', icon: 'fa-edit' },
                             { name: 'Nav', link: 'Nav', icon: 'fa-balance-scale' },
                             { name: 'Nested Routing', link: 'NestedRouting', icon: 'fa-book fa-fw' },
                             { name: 'Http Test', link: 'HttpTest' }], navgroups: []
                     },
                     {
-                        name: 'Level 3', navs: [
+                        name: 'Samples', navs: [
                             { name: 'Inheritance', link: 'Inheritance', icon: 'fa-snapchat-ghost' },
                             { name: 'Resolver', link: 'Resolver' },
                             { name: 'Dashboard Widgets', link: 'MyDashboard' },
@@ -96,8 +95,10 @@ export class NavGroupContainerComponent implements OnInit {
                             { name: 'Sortable Table', link: 'SortTable' }
                         ], navgroups: [
                             {
-                                name: 'Level 4', navs: [
-                                    { name: 'Home 3', link: 'Home', icon: 'fa-snapchat-ghost' },
+                                name: 'Forms', navs: [
+                                    { name: 'Template Form', link: 'templateform', icon: 'fa-snapchat-ghost' },
+                                    { name: 'Model Form', link: 'modelform', icon: 'fa-snapchat-ghost' },
+                                    { name: 'Model Builder Form', link: 'builderform', icon: 'fa-snapchat-ghost' },
                                     { name: 'Form 3', link: 'Form' },
                                     { name: 'Dashboard 3', link: 'Dashboard' }
                                 ], navgroups: []

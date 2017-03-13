@@ -10,10 +10,13 @@ import {NavModule } from './nav/nav.module';
 import {TreeModule} from './tree/tree.module';
 import {CustomCommonModule} from './common/c-common.module';
 import {CustomPipeModule} from './common/pipes/custom-pipe.module';
+import {SampleFormModule} from './samples/forms/sample-form.module';
+
 
 import {MatchingTagsPipe} from './tagging/pipe/match-tag.pipe';
 import {TaggingComponent} from './tagging/tagging.component';
 import {TreeRootComponent} from './tree/tree-root.component';
+import {TemplateFormComponent} from './samples/forms/template-form.component';
 
 @NgModule({
     imports: [BrowserModule,
@@ -25,10 +28,12 @@ import {TreeRootComponent} from './tree/tree-root.component';
         ReactiveFormsModule,
         CustomCommonModule,
         CustomPipeModule,
+        SampleFormModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'tagging', pathMatch: 'full' },
             { path: 'tagging', component: TaggingComponent },
             { path: 'tree', component: TreeRootComponent },
+            { path: 'templateform', component: TemplateFormComponent},
         ])
     ],
         
