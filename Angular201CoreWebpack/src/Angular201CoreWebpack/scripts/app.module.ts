@@ -17,6 +17,9 @@ import {MatchingTagsPipe} from './tagging/pipe/match-tag.pipe';
 import {TaggingComponent} from './tagging/tagging.component';
 import {TreeRootComponent} from './tree/tree-root.component';
 import {TemplateFormComponent} from './samples/forms/template-form.component';
+import {ModelDrivenFormComponent} from './samples/forms/model-form.component';
+import {ModelBuilderFormComponent} from './samples/forms/model-builder-form.component';
+
 
 @NgModule({
     imports: [BrowserModule,
@@ -33,7 +36,10 @@ import {TemplateFormComponent} from './samples/forms/template-form.component';
             { path: '', redirectTo: 'tagging', pathMatch: 'full' },
             { path: 'tagging', component: TaggingComponent },
             { path: 'tree', component: TreeRootComponent },
-            { path: 'templateform', component: TemplateFormComponent},
+            { path: 'templateform', component: TemplateFormComponent },
+            { path: 'modelform', component: ModelDrivenFormComponent },
+            { path: 'mbuilderform', component: ModelBuilderFormComponent },
+
         ])
     ],
         

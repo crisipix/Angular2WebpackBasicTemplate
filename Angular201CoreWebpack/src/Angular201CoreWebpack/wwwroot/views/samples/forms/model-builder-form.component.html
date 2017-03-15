@@ -1,0 +1,36 @@
+﻿<div class="container">
+    <h1>User Info Model Builder Form</h1>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" #nameRef required class="form-control"  formControlName="name"/>
+            <b>{{nameRef.className}}</b>
+                <div *ngIf="userForm.controls['name'].hasError('required')" class="alert alert-danger">
+                    Please Enter Name
+                </div>
+            <label>Email</label>
+            <input type="text" #emailRef class="form-control" formControlName="email"/>
+                <div *ngIf="userForm.controls['email'].hasError('required')" class="alert alert-danger">
+                    Please Enter Email
+                </div>
+                <div *ngIf="userForm.controls['email'].hasError('minlength')" class="alert alert-danger">
+                    Please Enter More than 4 characters
+                </div>
+            <div formGroupName="address">
+                <label>Street</label>
+                <input type="text" class="form-control" formControlName="street"/>
+
+                <label>City</label>
+                <input type="text" class="form-control" formControlName="city" />
+
+                <label>Zip Code</label>
+                <input type="text" class="form-control" formControlName="zipcode"  />
+                <div *ngIf="userForm.controls['address'].controls['zipcode'].hasError('pattern')" class="alert alert-danger">
+                    Please Enter a valid 5 digit zipcode. 
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Submit</button>
+        </div>
+    </form>
+</div>

@@ -4,6 +4,14 @@ import { Router } from '@angular/router';
 import { NavGroupComponent } from './navgroup.component';
 import {NavGroup} from './navgroup';
 import {Nav} from './nav';
+
+//import {Observable} from 'rxjs/Observable';
+//import {Observer} from 'rxjs/Observer';
+//import 'rxjs/add/operator/map';
+//import 'rxjs/add/operator/toPromise';
+
+import {NavService} from './services/nav.service';
+
 //import {ImageGenComponent} from '../common/images/image-gen.component';
 
 
@@ -29,7 +37,9 @@ export class NavGroupContainerComponent implements OnInit {
 
     constructor(private cdr: ChangeDetectorRef,
         private _eref: ElementRef,
-        private _router: Router) {
+        private _router: Router,
+        private _service : NavService
+    ) {
         this.isNavVisible = !this.isMenuButtonVisible;
         this.isVertical = false;
     }
@@ -42,124 +52,17 @@ export class NavGroupContainerComponent implements OnInit {
         selected.isSelected = true;
         this.selectedNav = selected;
 
-        //console.log(this.navconfig);
-        //this.navconfig = [
-        //    new NavGroup(
-        //        'Root',
-        //        [
-        //            new Nav('Home', 'Home'),
-        //            new Nav('Form', 'Form'),
-        //            new Nav('Dashboard', 'Dashboard')
-        //        ],
-        //        [
-        //            new NavGroup('Widgets', [
-        //                new Nav('Widgets', 'Widgets', 'fa-edit'),
-        //                new Nav('Nav', 'Nav', 'fa-balance-scale'),
-        //                new Nav('Http Test', 'HttpTest')], []),
-        //            new NavGroup('Level 3',  [
-        //                new Nav('Inheritance', 'Inheritance', 'fa-snapchat-ghost'),
-        //                new Nav('Resolver', 'Resolver'),
-        //                new Nav('Dashboard Widgets', 'MyDashboard')
-        //                ], [
-        //                        new NavGroup('Level 4', [
-        //                            new Nav('Home 3', 'Home', 'fa-snapchat-ghost'),
-        //                            new Nav('Form 3', 'Form'),
-        //                            new Nav('Dashboard 3', 'Dashboard')
-        //                    ], [])]),
-        //            new NavGroup('About', [ new Nav('AppCaller', 'AppCaller', 'fa-book fa-fw')], [], 'right', 'fa-user')
-
-        //        ])
-        //];
-        this.config = {
-            left: [{
-                name: 'Root', navs:
-                [
-                    { name: 'Home', link: 'tagging' },
-                    { name: 'Tree', link: 'tree' },
-                    { name: 'Dashboard', link: 'tagging' },
-                ],
-                navgroups: [
-                    {
-                        name: 'Main Items', navs: [
-                            { name: 'Submission State', link: 'SubmissionState', icon: 'fa-edit' },
-                            { name: 'Nav', link: 'Nav', icon: 'fa-balance-scale' },
-                            { name: 'Nested Routing', link: 'NestedRouting', icon: 'fa-book fa-fw' },
-                            { name: 'Http Test', link: 'HttpTest' }], navgroups: []
-                    },
-                    {
-                        name: 'Samples', navs: [
-                            { name: 'Inheritance', link: 'Inheritance', icon: 'fa-snapchat-ghost' },
-                            { name: 'Resolver', link: 'Resolver' },
-                            { name: 'Dashboard Widgets', link: 'MyDashboard' },
-                            { name: 'Custom Table', link: 'Table' },
-                            { name: 'Sortable Table', link: 'SortTable' }
-                        ], navgroups: [
-                            {
-                                name: 'Forms', navs: [
-                                    { name: 'Template Form', link: 'templateform', icon: 'fa-snapchat-ghost' },
-                                    { name: 'Model Form', link: 'modelform', icon: 'fa-snapchat-ghost' },
-                                    { name: 'Model Builder Form', link: 'builderform', icon: 'fa-snapchat-ghost' },
-                                    { name: 'Form 3', link: 'Form' },
-                                    { name: 'Dashboard 3', link: 'Dashboard' }
-                                ], navgroups: []
-                            }]
-                    }
-                ]
-            }],
-            right: [{
-                name: 'Root',
-                navs: [],
-                navgroups: [
-                    {
-                        name: 'About',
-                        navs: [
-                            { name: 'Nested Routing', link: 'NestedRouting', icon: 'fa-book fa-fw' },
-                            { name: 'Settings', link: 'NestedRouting', icon: 'fa-book fa-fw' }
-                        ], navgroups: [], location: 'right', icon: 'fa-user'
-                    }
-                ]}]
-        };
+        this._service.getConfig().subscribe(data => {
+        this.config = data;
         this.leftConfig = this.mapNavGroups(this.config.left);
         this.rightConfig = this.mapNavGroups(this.config.right);
 
-        //this.leftConfig = [
-        //    new NavGroup(
-        //        'Root',
-        //        [
-        //            selected,
-        //            new Nav('Form', 'Form'),
-        //            new Nav('Dashboard', 'Dashboard')
-        //        ],
-        //        [
-        //            new NavGroup('Widgets', [
-        //                new Nav('Widgets', 'Widgets', 'fa-edit'),
-        //                new Nav('Nav', 'Nav', 'fa-balance-scale'),
-        //                new Nav('Http Test', 'HttpTest')], []),
-        //            new NavGroup('Level 3', [
-        //                new Nav('Inheritance', 'Inheritance', 'fa-snapchat-ghost'),
-        //                new Nav('Resolver', 'Resolver'),
-        //                new Nav('Dashboard Widgets', 'MyDashboard')
-        //            ], [
-        //                    new NavGroup('Level 4', [
-        //                        new Nav('Home 3', 'Home', 'fa-snapchat-ghost'),
-        //                        new Nav('Form 3', 'Form'),
-        //                        new Nav('Dashboard 3', 'Dashboard')
-        //               ], [])])
-        //        ])
-        //];
-        //this.rightConfig = [
-        //    new NavGroup(
-        //        'Root',
-        //        [],
-        //        [
-        //            new NavGroup('About', [new Nav('AppCaller', 'AppCaller', 'fa-book fa-fw')], [], 'right', 'fa-user')
-        //        ])
-        //];
-
-        
         console.log(this.leftConfig);
         console.log(this.rightConfig);
 
+
+        });
+        
         // check the window with after initializing the nav.
         this.checkWidth(window.innerWidth);
     }

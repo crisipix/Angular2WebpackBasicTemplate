@@ -1,12 +1,24 @@
 ﻿<div class="container">
     <h1>User Info Template Driven Form</h1>
-    <form #userTemplateForm="ngForm" (ngSubmit)="onSubmit(userTemplateForm.value)">
+    <form #userTemplateForm="ngForm" (ngSubmit)="onSubmit(userTemplateForm.value)" novalidate>
         <div class="form-group">
             <label>Name</label>
-            <input type="text" class="form-control" name="name" [(ngModel)] ="user.name"/>
-
+            <input type="text" #nameRef="ngModel" required class="form-control"  name="name" [(ngModel)] ="user.name"/>
+            <b>{{nameRef.className}}</b>
+            <div [hidden]="nameRef.valid || nameRef.pristine" class="alert alert-danger">
+                Enter Name.
+            </div>
             <label>Email</label>
-            <input type="text" class="form-control" name="email" [(ngModel)] ="user.email"/>
+            <input type="text" class="form-control" #emailRef="ngModel" required minlength="4" name="email" [(ngModel)] ="user.email"/>
+            <div *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched)">
+                <div [hidden]="!emailRef.errors.required" class="alert alert-danger">
+                    Please Enter Email
+                </div>
+                <div [hidden]="!emailRef.errors.minlength" class="alert alert-danger">
+                    Please Enter at least 4 characters.
+                </div>
+
+            </div>
             <div ngModelGroup="address">
                 <label>Street</label>
                 <input type="text" class="form-control" name="street" ngModel />
@@ -15,11 +27,15 @@
                 <input type="text" class="form-control" name="city" ngModel />
 
                 <label>Zip Code</label>
-                <input type="text" class="form-control" name="zipcode" ngModel />
-
+                <input type="text" #zipRef="ngModel" pattern="^[1-9][0-9]{4}"class="form-control" name="zipcode" ngModel />
+                <div *ngIf="zipRef.errors && (zipRef.dirty || zipRef.touched)">
+                    <div [hidden]="!zipRef.errors.pattern" class="alert alert-danger">
+                        Enter a valid 5 digit zip!
+                    </div>
+                </div>
             </div>
             
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!userTemplateForm.valid">Submit</button>
         </div>
     </form>
 </div>

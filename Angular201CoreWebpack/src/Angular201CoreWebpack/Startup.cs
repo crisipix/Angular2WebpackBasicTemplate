@@ -57,13 +57,14 @@ namespace Angular201CoreWebpack
                 if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
                 {
                     context.Request.Path = "/index.html";
+                    context.Response.StatusCode = 200; // Make sure we update the status code, otherwise it returns 404
                     await next();
                 }
             });
 
 
-            // Serve wwwroot as root
-            // app.UseFileServer();
+            // Serve wwwroot as root otherwise it cannot find the index.html
+            app.UseFileServer();
         }
     }
 }
