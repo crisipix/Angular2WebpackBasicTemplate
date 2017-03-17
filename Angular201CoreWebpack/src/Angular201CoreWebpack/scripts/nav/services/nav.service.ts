@@ -81,7 +81,15 @@ export class NavService
                                     { name: 'Template Form', link: 'templateform', icon: 'fa-snapchat-ghost' },
                                     { name: 'Model Form', link: 'modelform', icon: 'fa-snapchat-ghost' },
                                     { name: 'Model Builder Form', link: 'mbuilderform', icon: 'fa-snapchat-ghost' },
-                                ], navgroups: []
+                                ], navgroups: [],
+
+                            },
+                        {
+                                name: 'Shared', navs: [
+                                    { name: 'Left Shared', link: 'left', icon: 'fa-snapchat-ghost' },
+                                    { name: 'Right Shared', link: 'right', icon: 'fa-snapchat-ghost' },
+                                ], navgroups: [],
+
                             }]
                     }
                 ]

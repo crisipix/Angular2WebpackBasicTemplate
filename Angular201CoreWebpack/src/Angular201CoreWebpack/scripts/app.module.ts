@@ -11,7 +11,7 @@ import {TreeModule} from './tree/tree.module';
 import {CustomCommonModule} from './common/c-common.module';
 import {CustomPipeModule} from './common/pipes/custom-pipe.module';
 import {SampleFormModule} from './samples/forms/sample-form.module';
-
+import {SharedServiceModule} from './samples/sharedservice/module/shared-service.module';
 
 import {MatchingTagsPipe} from './tagging/pipe/match-tag.pipe';
 import {TaggingComponent} from './tagging/tagging.component';
@@ -19,6 +19,8 @@ import {TreeRootComponent} from './tree/tree-root.component';
 import {TemplateFormComponent} from './samples/forms/template-form.component';
 import {ModelDrivenFormComponent} from './samples/forms/model-form.component';
 import {ModelBuilderFormComponent} from './samples/forms/model-builder-form.component';
+import {SharedLeftComponent} from './samples/sharedservice/shared-left.component';
+import {SharedRightComponent} from './samples/sharedservice/shared-right.component';
 
 
 @NgModule({
@@ -31,6 +33,7 @@ import {ModelBuilderFormComponent} from './samples/forms/model-builder-form.comp
         ReactiveFormsModule,
         CustomCommonModule,
         CustomPipeModule,
+        SharedServiceModule,
         SampleFormModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'tagging', pathMatch: 'full' },
@@ -39,6 +42,8 @@ import {ModelBuilderFormComponent} from './samples/forms/model-builder-form.comp
             { path: 'templateform', component: TemplateFormComponent },
             { path: 'modelform', component: ModelDrivenFormComponent },
             { path: 'mbuilderform', component: ModelBuilderFormComponent },
+            { path: 'left', component: SharedLeftComponent },
+            { path: 'right', component: SharedRightComponent },
 
         ])
     ],
