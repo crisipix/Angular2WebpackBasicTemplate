@@ -95,6 +95,7 @@ export class NavService
                         name: 'Extensions', navs: [
                             { name: 'Hanson Table', link: 'handson', icon: 'fa-edit' },
                             { name: 'Boostrap', link: 'ng2boostrap', icon: 'fa-edit' },
+                            { name: 'Dragula', link: 'dragula', icon: 'fa-edit' },
                         ], navgroups: []
                     },
                 ]

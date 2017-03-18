@@ -28,6 +28,7 @@ import {DefaultSubComponent} from './samples/sharedservice/default-sub.component
 import {ParentComponent} from './samples/sharedservice/parent-child.component';
 import {HandsonComponent} from './samples/thirdparty/handson.component';
 import {Ng2BootstrapComponent } from './samples/thirdparty/ng2bootstrap.component';
+import {DragulaComponent} from './samples/thirdparty/dragula.component';
 
 @NgModule({
     imports: [BrowserModule,
@@ -53,6 +54,7 @@ import {Ng2BootstrapComponent } from './samples/thirdparty/ng2bootstrap.componen
             { path: 'right', component: SharedRightComponent },
             { path: 'handson', component: HandsonComponent },
             { path: 'ng2boostrap', component: Ng2BootstrapComponent },
+            { path: 'dragula', component: DragulaComponent },
             
             {
                 path: 'parentchild', component: ParentComponent,
