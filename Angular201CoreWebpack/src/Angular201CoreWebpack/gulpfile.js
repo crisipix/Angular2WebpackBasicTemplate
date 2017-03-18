@@ -27,6 +27,7 @@ gulp.task("scriptsNStyles", () => {
             'moment/**js',
             'dragula/**',
             'ng2-dragula/**',
+            'ng2-handsontable/**'
 
     ], {
         cwd: "node_modules/**"
@@ -34,9 +35,10 @@ gulp.task("scriptsNStyles", () => {
         .pipe(gulp.dest("./wwwroot/libs"));
 
     gulp.src([
-        'node_modules/bootstrap/dist/css/bootstrap.css',
-        'node_modules/dragula/dist/dragula.css',
-        'node_modules/font-awesome/css/font-awesome.css'
+        'node_modules/bootstrap/dist/css/bootstrap.min.css',
+        'node_modules/dragula/dist/dragula.min.css',
+        'node_modules/font-awesome/css/font-awesome.min.css',
+        'node_modules/handsontable/dist/handsontable.min.css',
     ]).pipe(gulp.dest('./wwwroot/libs/css'));
     gulp.src([
        'node_modules/font-awesome/fonts/**'

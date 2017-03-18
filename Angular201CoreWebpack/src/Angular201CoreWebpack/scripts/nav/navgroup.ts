@@ -53,7 +53,7 @@ export class NavGroup {
             styleClass = { 'nav-sub-item-horizontal-right': isRight };
         }
         // added for nested subgroup
-        if (!isVertical && this.level > 1) {
+        else    if (!isVertical && this.level > 1) {
             styleClass = { 'nav-sub-item-horizontal': true };
         }
         // added for first

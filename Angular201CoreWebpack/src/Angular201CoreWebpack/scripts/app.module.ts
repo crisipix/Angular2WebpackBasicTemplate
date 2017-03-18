@@ -27,7 +27,7 @@ import {SharedRightComponent} from './samples/sharedservice/shared-right.compone
 import {DefaultSubComponent} from './samples/sharedservice/default-sub.component';
 import {ParentComponent} from './samples/sharedservice/parent-child.component';
 import {HandsonComponent} from './samples/thirdparty/handson.component';
-
+import {Ng2BootstrapComponent } from './samples/thirdparty/ng2bootstrap.component';
 
 @NgModule({
     imports: [BrowserModule,
@@ -51,7 +51,9 @@ import {HandsonComponent} from './samples/thirdparty/handson.component';
             { path: 'mbuilderform', component: ModelBuilderFormComponent },
             { path: 'left', component: SharedLeftComponent },
             { path: 'right', component: SharedRightComponent },
-            { path: 'handson', component: HandsonComponent},
+            { path: 'handson', component: HandsonComponent },
+            { path: 'ng2boostrap', component: Ng2BootstrapComponent },
+            
             {
                 path: 'parentchild', component: ParentComponent,
                 children: [
