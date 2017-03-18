@@ -6,6 +6,8 @@ import {IndependentService} from '../services/independent.service';
 import {SharedService} from '../services/shared.service';
 import {SharedLeftComponent} from '../shared-left.component';
 import {SharedRightComponent} from '../shared-right.component';
+import {ParentComponent} from '../parent-child.component';
+import {ChildComponent} from '../parent-child.component';
 
 @NgModule({
     imports: [
@@ -14,11 +16,15 @@ import {SharedRightComponent} from '../shared-right.component';
     ],
     declarations: [
         SharedLeftComponent,
-        SharedRightComponent
+        SharedRightComponent,
+        ParentComponent,
+        ChildComponent
     ],
     exports: [
         SharedLeftComponent,
-        SharedRightComponent
+        SharedRightComponent,
+        ParentComponent,
+        ChildComponent
     ],
     providers: [SharedService, IndependentService]
 

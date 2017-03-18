@@ -21,6 +21,7 @@ import {ModelDrivenFormComponent} from './samples/forms/model-form.component';
 import {ModelBuilderFormComponent} from './samples/forms/model-builder-form.component';
 import {SharedLeftComponent} from './samples/sharedservice/shared-left.component';
 import {SharedRightComponent} from './samples/sharedservice/shared-right.component';
+import {ParentComponent} from './samples/sharedservice/parent-child.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import {SharedRightComponent} from './samples/sharedservice/shared-right.compone
             { path: 'mbuilderform', component: ModelBuilderFormComponent },
             { path: 'left', component: SharedLeftComponent },
             { path: 'right', component: SharedRightComponent },
+            { path: 'parentchild', component: ParentComponent },
 
         ])
     ],

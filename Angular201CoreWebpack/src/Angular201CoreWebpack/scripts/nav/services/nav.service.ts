@@ -88,6 +88,7 @@ export class NavService
                                 name: 'Shared', navs: [
                                     { name: 'Left Shared', link: 'left', icon: 'fa-snapchat-ghost' },
                                     { name: 'Right Shared', link: 'right', icon: 'fa-snapchat-ghost' },
+                                    { name: 'Parent Child', link: 'parentchild', icon: 'fa-snapchat-ghost' },
                                 ], navgroups: [],
 
                             }]

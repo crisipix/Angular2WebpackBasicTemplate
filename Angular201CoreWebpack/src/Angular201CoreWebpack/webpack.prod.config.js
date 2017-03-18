@@ -3,6 +3,7 @@
  */
 const DefinePlugin = require('./node_modules/webpack/lib/DefinePlugin');
 const HtmlWebpackPlugin = require('./node_modules/webpack-html-plugin');
+const UglifyJsPlugin = require('./node_modules/webpack/lib/optimize/UglifyJsPlugin');
 var webpack = require("webpack");
 var commonChunkPlugin = webpack.optimize.CommonsChunkPlugin;
     
@@ -25,7 +26,7 @@ module.exports = {
     },
     output: {
         path: __dirname,
-        filename: './appScripts/dist/prod.[chunkhash].bundle.js'
+        filename: './appScripts/dist/prod.min.[chunkhash].bundle.js'
     },
     devtool:'source-map',
     resolve: { extensions: ['', '.js', '.ts'] },
@@ -35,7 +36,12 @@ module.exports = {
         }]
     },
     plugins: [
-
+        new UglifyJsPlugin({  minimize: true,
+            sourceMap: false,
+            output: { comments: false },
+            compressor: { warnings: false }
+        }
+            ),
        /**
         * Plugin: DefinePlugin
         * Description: Define free variables.

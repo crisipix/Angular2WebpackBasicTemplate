@@ -3,6 +3,8 @@
  */
 const DefinePlugin = require('./node_modules/webpack/lib/DefinePlugin');
 const HtmlWebpackPlugin = require('./node_modules/webpack-html-plugin');
+const UglifyJsPlugin = require('./node_modules/webpack/lib/optimize/UglifyJsPlugin');
+
 //const webpack = require('./node_modules/webpack/lib/webpack.js');
 var webpack = require("webpack");
 var commonChunkPlugin = webpack.optimize.CommonsChunkPlugin;
@@ -35,7 +37,13 @@ module.exports = {
         }]
     },
     plugins: [
-
+                new UglifyJsPlugin({
+                    minimize: true,
+                    sourceMap: false,
+                    output: { comments: false },
+                    compressor: { warnings: false }
+                }
+            ),
        /**
         * Plugin: DefinePlugin
         * Description: Define free variables.
