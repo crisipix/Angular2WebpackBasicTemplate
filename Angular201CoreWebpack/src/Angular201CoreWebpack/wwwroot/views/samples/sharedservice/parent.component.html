@@ -1,21 +1,33 @@
-﻿<h1>Parent</h1>
-<form class="form-horizontal" #userTemplateForm="ngForm" (ngSubmit)="onSubmit(userTemplateForm.value)">
-    <fieldset>
-        <legend>Legend</legend>
-        <div class="form-group">
-            <label for="inputMessage" class="col-lg-2 control-label">Message</label>
-            <div class="col-lg-10">
-                <input type="text" required class="form-control" name="message" placeholder="Message" ngModel>
+﻿<div class="panel panel-body">
+    <h1>Parent</h1>
+    <form class="form-horizontal" #userTemplateForm="ngForm" (ngSubmit)="onSubmit(userTemplateForm.value)">
+        <fieldset>
+            <legend>Legend</legend>
+            <div class="form-group">
+                <label for="inputMessage" class="col-lg-2 control-label">Message</label>
+                <div class="col-lg-10">
+                    <input type="text" required class="form-control" name="message" placeholder="Message" ngModel>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </fieldset>
-</form>
-<div class="alert alert-dismissible alert-info">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Heads up!</strong>
-    This <a href="#" class="alert-link">alert needs your attention</a>, but it's not super important.
-    sharedmessage {{message}}
-    
+        </fieldset>
+    </form>
+    <div class="alert alert-dismissible alert-info">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Heads up!</strong>
+        This <a href="#" class="alert-link">alert needs your attention</a>, but it's not super important.
+        sharedmessage {{message}}
+
+        <button class="btn btn-primary" (click)="navigate('left')">Left</button>
+        <button class="btn btn-primary" (click)="navigate('right')">Right</button>
+
+
+    </div>
 </div>
-<child></child>
+<div class="panel panel-body">
+    <child></child>
+
+</div>
+<div class="panel panel-body">
+    <router-outlet></router-outlet>
+</div>

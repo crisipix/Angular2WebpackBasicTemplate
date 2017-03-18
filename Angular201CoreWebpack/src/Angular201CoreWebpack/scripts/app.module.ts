@@ -21,6 +21,7 @@ import {ModelDrivenFormComponent} from './samples/forms/model-form.component';
 import {ModelBuilderFormComponent} from './samples/forms/model-builder-form.component';
 import {SharedLeftComponent} from './samples/sharedservice/shared-left.component';
 import {SharedRightComponent} from './samples/sharedservice/shared-right.component';
+import {DefaultSubComponent} from './samples/sharedservice/default-sub.component';
 import {ParentComponent} from './samples/sharedservice/parent-child.component';
 
 
@@ -45,7 +46,14 @@ import {ParentComponent} from './samples/sharedservice/parent-child.component';
             { path: 'mbuilderform', component: ModelBuilderFormComponent },
             { path: 'left', component: SharedLeftComponent },
             { path: 'right', component: SharedRightComponent },
-            { path: 'parentchild', component: ParentComponent },
+            {
+                path: 'parentchild', component: ParentComponent,
+                children: [
+                    { path: '', component: DefaultSubComponent }, // url: parentchild/left
+                    { path: 'left', component: SharedLeftComponent }, // url: parentchild/left
+                    { path: 'right', component: SharedRightComponent } // url: parentchild/right
+                ]
+            },
 
         ])
     ],

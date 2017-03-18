@@ -1,6 +1,6 @@
 ﻿import { Component, Input, Output, OnInit} from '@angular/core';
 import {SharedService} from './services/shared.service';
-
+import { Routes, Router } from '@angular/router';
 
 @Component({
     selector: 'parent',
@@ -12,10 +12,10 @@ export class ParentComponent {
     message: string;
 
     constructor(
+        private _router: Router,
         private _service: SharedService
     ) {
         this._service.messageChangedEvent.subscribe(e => { this.onMessageChanged() });
-
     }
 
     onSubmit(value) {
@@ -24,6 +24,23 @@ export class ParentComponent {
 
     onMessageChanged() {
         this.message = this._service.sharedMessage;
+    }
+
+    navigate(link: string) {
+        switch (link){
+            case 'left':
+                this._router.navigate(['parentchild/left']);
+                console.log('left');
+                break;
+            case 'right':
+                this._router.navigate(['parentchild/right']);
+
+                console.log('right');
+                break;
+            default:
+                console.log('where am I navigating?');
+                break;
+        }
     }
 }
 
