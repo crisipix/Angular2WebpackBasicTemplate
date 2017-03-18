@@ -1,15 +1,16 @@
 ﻿<ul class="nav-group">
     <li *ngFor="let navgroup of navconfig" [ngClass]="navgroup.isPushedRight(isVertical)">
+        <!--If the navigation group isn't the root then show the group-->
         <div class="nav-group-div" *ngIf="!navgroup.isRoot" (click)="navgroup.toggle();">
             <i class="fa {{navgroup.icon}} nav-menu-icon"></i>
             <strong>{{ navgroup.name }}</strong>
             <i class="fa fa-chevron-left nav-group-expanded" *ngIf="!navgroup.isRoot" [ngClass]="{'fa-rotate-270': navgroup.expanded }"></i>
         </div>
+        <!--Navigation Items within the subgroup-->
         <div *ngIf="navgroup.expanded" [ngClass]="{'nav-popup-menu' : !isVertical && !navgroup.isRoot}">
             <ul>
                 <li class="nav-item" *ngFor="let nav of navgroup.navs"
-                    [ngClass]="{'nav-item-horizontal': !isVertical && !navgroup.isRoot,
-                                'nav-root-item-horizontal' : !isVertical && navgroup.isRoot}">
+                    [ngClass]="navgroup.getItemClass(isVertical)">
                     <div class="nav-item-div nav-noselect" (click)="navigate(navgroup.name, nav.link, nav); nav.select();"
                          [ngClass]="{'nav-item-div-selected' : nav.isSelected && isVertical, 'nav-item-div-selected-horizontal' : nav.isSelected && !isVertical}">
                         <i class="fa {{nav.icon}} nav-menu-icon"></i>
@@ -18,6 +19,7 @@
                     </div>
                 </li>
             </ul>
+            <!--Nested Subgroup within the current group-->
             <nav-group class="nav-subgroup nav-noselect"
                        [navgroup]="navgroup"
                        [navconfig]="navgroup.navgroups"

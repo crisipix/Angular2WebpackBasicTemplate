@@ -54,8 +54,8 @@ export class NavGroupContainerComponent implements OnInit {
 
         this._service.getConfig().subscribe(data => {
         this.config = data;
-        this.leftConfig = this.mapNavGroups(this.config.left);
-        this.rightConfig = this.mapNavGroups(this.config.right);
+        this.leftConfig = this.mapNavGroups(this.config.left, 0);
+        this.rightConfig = this.mapNavGroups(this.config.right, 0);
 
         console.log(this.leftConfig);
         console.log(this.rightConfig);
@@ -237,9 +237,19 @@ export class NavGroupContainerComponent implements OnInit {
         return navs.map(n => { return new Nav(n.name, n.link, n.icon); });
     }
 
-    mapNavGroups(navgroups: Array<any>): Array<NavGroup> {
+    /*
+        Maps Navigation Group and all of their inner navigations
+    */
+    mapNavGroups(navgroups: Array<any>, level : number): Array<NavGroup> {
         if (!navgroups || navgroups.length == 0) { return new Array<NavGroup>(); }
 
-        return navgroups.map(ng => { return new NavGroup(ng.name, this.mapNavs(ng.navs), this.mapNavGroups(ng.navgroups), ng.location, ng.icon); });
+        return navgroups.map(ng => {
+            return new NavGroup(ng.name,
+                this.mapNavs(ng.navs),
+                this.mapNavGroups(ng.navgroups, level + 1),
+                ng.location,
+                ng.icon,
+                level);
+        });
     }
 }

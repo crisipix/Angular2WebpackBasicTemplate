@@ -37,13 +37,13 @@ module.exports = {
         }]
     },
     plugins: [
-                new UglifyJsPlugin({
-                    minimize: true,
-                    sourceMap: false,
-                    output: { comments: false },
-                    compressor: { warnings: false }
-                }
-            ),
+            //    new UglifyJsPlugin({
+            //        minimize: true,
+            //        sourceMap: false,
+            //        output: { comments: false },
+            //        compressor: { warnings: false }
+            //    }
+            //),
        /**
         * Plugin: DefinePlugin
         * Description: Define free variables.

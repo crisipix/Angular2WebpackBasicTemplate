@@ -26,7 +26,11 @@ export class ParentComponent {
         this.message = this._service.sharedMessage;
     }
 
+    /*
+        https://coryrylan.com/blog/introduction-to-angular-routing
+    */
     navigate(link: string) {
+
         switch (link){
             case 'left':
                 this._router.navigate(['parentchild/left']);
