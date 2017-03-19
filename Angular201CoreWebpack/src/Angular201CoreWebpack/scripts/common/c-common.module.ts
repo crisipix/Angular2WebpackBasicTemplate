@@ -1,6 +1,6 @@
 ﻿import { NgModule }      from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {FormsModule} from '@angular/forms';
 
 import {ImageGenComponent} from './images/image-gen.component';
 import {SpinnerComponent} from './images/spinner.component';
@@ -10,7 +10,7 @@ import {ValidateStart} from './validators/startswith.validator';
 import {ValidationResult} from './validators/validator.result';
 
 @NgModule({
-    imports: [CommonModule],
+    imports: [CommonModule, FormsModule],
     declarations: [ImageGenComponent, SpinnerComponent, TextImageGenComponent],
     exports: [ImageGenComponent, SpinnerComponent, TextImageGenComponent]
 })

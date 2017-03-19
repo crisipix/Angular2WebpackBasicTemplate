@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {CustomPipeModule} from '../common/pipes/custom-pipe.module';
+import {CustomPipeModule} from '../common/pipes/module/custom-pipe.module';
 
 import { TreeComponent } from './tree.component';
 import { TreeRootComponent } from './tree-root.component';

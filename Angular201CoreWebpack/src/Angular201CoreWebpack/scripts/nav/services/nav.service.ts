@@ -73,6 +73,11 @@ export class NavService
                                         { name: 'Model Builder Form', link: 'mbuilderform', icon: 'fa-snapchat-ghost' },
                                     ], navgroups: [],
                                 },
+                                {
+                                    name: 'Search Pipes', navs: [
+                                        { name: 'Search Filter', link: 'searchfilter' },
+                                    ], navgroups: [],
+                                },
                             ]
                     },
                     {

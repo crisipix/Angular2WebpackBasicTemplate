@@ -9,11 +9,12 @@ import {AppComponent} from './app';
 import {NavModule } from './nav/nav.module';
 import {TreeModule} from './tree/tree.module';
 import {CustomCommonModule} from './common/c-common.module';
-import {CustomPipeModule} from './common/pipes/custom-pipe.module';
+import {CustomPipeModule} from './common/pipes/module/custom-pipe.module';
 import {SampleFormModule} from './samples/forms/sample-form.module';
 import {SharedServiceModule} from './samples/sharedservice/module/shared-service.module';
 import {ThirdPartyModule} from './samples/thirdparty/module/thirdparty.module';
 import {HttpCallModule} from './samples/httpcall/module/httpcall.module';
+import {SearchFilterModule} from './samples/searchfilter/module/searchfilter.module';
 
 
 
@@ -31,6 +32,7 @@ import {HandsonComponent} from './samples/thirdparty/handson.component';
 import {Ng2BootstrapComponent } from './samples/thirdparty/ng2bootstrap.component';
 import {DragulaComponent} from './samples/thirdparty/dragula.component';
 import {HttpCallComponent} from './samples/httpcall/httpcall.component';
+import {SearchFilterComponent} from './samples/searchfilter/searchfilter.component';
 
 @NgModule({
     imports: [BrowserModule,
@@ -46,6 +48,7 @@ import {HttpCallComponent} from './samples/httpcall/httpcall.component';
         SampleFormModule,
         ThirdPartyModule,
         HttpCallModule,
+        SearchFilterModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'tagging', pathMatch: 'full' },
             { path: 'tagging', component: TaggingComponent },
@@ -59,6 +62,7 @@ import {HttpCallComponent} from './samples/httpcall/httpcall.component';
             { path: 'ng2boostrap', component: Ng2BootstrapComponent },
             { path: 'dragula', component: DragulaComponent },
             { path: 'httpcall', component: HttpCallComponent },
+            { path: 'searchfilter', component: SearchFilterComponent },
             
             {
                 path: 'parentchild', component: ParentComponent,

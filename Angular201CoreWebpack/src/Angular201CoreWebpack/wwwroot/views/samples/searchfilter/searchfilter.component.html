@@ -1,0 +1,13 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <h3>Search Filter Test</h3>
+        <button class="btn btn-primary" (click)="toggleFilter()">Search</button>
+        <div *ngIf="showFilter">
+            <search-box (update)="filter=$event" (toggleFilter)="toggleFilter()"></search-box>
+        </div>
+        
+        <ul>
+            <li *ngFor="let record of records | search:filter">{{ record | json}}</li>
+        </ul>
+    </div>
+</div>
