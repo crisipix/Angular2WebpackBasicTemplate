@@ -13,6 +13,7 @@ import {CustomPipeModule} from './common/pipes/custom-pipe.module';
 import {SampleFormModule} from './samples/forms/sample-form.module';
 import {SharedServiceModule} from './samples/sharedservice/module/shared-service.module';
 import {ThirdPartyModule} from './samples/thirdparty/module/thirdparty.module';
+import {HttpCallModule} from './samples/httpcall/module/httpcall.module';
 
 
 
@@ -29,6 +30,7 @@ import {ParentComponent} from './samples/sharedservice/parent-child.component';
 import {HandsonComponent} from './samples/thirdparty/handson.component';
 import {Ng2BootstrapComponent } from './samples/thirdparty/ng2bootstrap.component';
 import {DragulaComponent} from './samples/thirdparty/dragula.component';
+import {HttpCallComponent} from './samples/httpcall/httpcall.component';
 
 @NgModule({
     imports: [BrowserModule,
@@ -43,6 +45,7 @@ import {DragulaComponent} from './samples/thirdparty/dragula.component';
         SharedServiceModule,
         SampleFormModule,
         ThirdPartyModule,
+        HttpCallModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'tagging', pathMatch: 'full' },
             { path: 'tagging', component: TaggingComponent },
@@ -55,6 +58,7 @@ import {DragulaComponent} from './samples/thirdparty/dragula.component';
             { path: 'handson', component: HandsonComponent },
             { path: 'ng2boostrap', component: Ng2BootstrapComponent },
             { path: 'dragula', component: DragulaComponent },
+            { path: 'httpcall', component: HttpCallComponent },
             
             {
                 path: 'parentchild', component: ParentComponent,

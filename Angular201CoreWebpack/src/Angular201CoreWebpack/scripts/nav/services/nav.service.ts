@@ -66,7 +66,14 @@ export class NavService
                             { name: 'Submission State', link: 'SubmissionState', icon: 'fa-edit' },
                             { name: 'Nav', link: 'Nav', icon: 'fa-balance-scale' },
                             { name: 'Nested Routing', link: 'NestedRouting', icon: 'fa-book fa-fw' },
-                            { name: 'Http Test', link: 'HttpTest' }], navgroups: []
+                            ], navgroups: [
+                                {
+                                    name: 'Service Calls', navs: [
+                                        { name: 'Http Test', link: 'httpcall' },
+                                        { name: 'Model Builder Form', link: 'mbuilderform', icon: 'fa-snapchat-ghost' },
+                                    ], navgroups: [],
+                                },
+                            ]
                     },
                     {
                         name: 'Samples', navs: [

@@ -1,0 +1,35 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <h3>Http Test</h3>
+        <button class="btn btn-primary" (click)="onTestGet()">Request</button>
+        <alert type="info">{{getData}}</alert>
+        <alert type="info">First Post Response : {{firstPost | json}}</alert>
+
+        <alert type="info">Call Error {{error}}</alert>
+
+        <ul>
+            <li>
+                <button class="btn btn-primary" (click)="getPostsByPromise()">Get Request Via Promise</button>
+            </li>
+            <li>
+                <button class="btn btn-primary" (click)="getPostsByObservable()">Get Request Via Observable</button>
+            </li>
+            <li>
+                <button class="btn btn-primary" (click)="postData()">Post Request</button>
+                <p>Request: {{postedData}}</p>
+            </li>
+        </ul>
+        <form>
+            <div class="form-group">
+                <label>Post To Delete</label>
+                    <input type="text" placeholder="Id to Delete" class="form-control" name="deleteId" ngModel />
+                    <button class="btn btn-primary" (click)="deletePost()"> Delete Post By Id</button>
+                    <p>Deleted : {{ deletedId }}</p>
+                </div>
+        </form>
+        All Posts
+        <ul>
+            <li *ngFor="let post of allPosts">{{post | json}}</li>
+        </ul>
+    </div>
+</div>
