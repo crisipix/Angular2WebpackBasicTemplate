@@ -1,0 +1,18 @@
+﻿
+<form class="input-group" [formGroup]="newRecordForm" novalidate>
+    <input #newRecordEl type="text" formControlName="newRecord" class="form-control"
+           [ngClass]="{valid : newRecord.valid && status.isValid, invalid : status.isValid==false}"
+           placeholder="New Record" (keyup)="update.emit(newRecord.value)" />
+    <span class="input-group-btn">
+        <button type="button" [disabled]="status.isValidating || !newRecord.valid" class="btn btn-default" (click)="addRecord()">
+            <i *ngIf="!status.isValidating" class="fa fa-check fa"></i>
+            <i *ngIf="status.isValidating" class="fa fa-spinner fa-spin fa-fw" style="font-size:medium"></i>
+        </button>
+        <button type="reset" [disabled]="status.isValidating " class="btn btn-danger" (click)="toggleAdd()"><i class="fa fa-remove fa"></i></button>
+    </span>
+</form>
+<div [hidden]="newRecord.pristine || (newRecord.valid && ( status && status.isValid))" class="alert" style="font-weight:bold">
+    <ul>
+        <li *ngFor="let e of getErrors()">{{e}}</li>
+    </ul>
+</div>

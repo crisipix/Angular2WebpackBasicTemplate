@@ -93,6 +93,7 @@ export class NavService
                                     { name: 'Template Form', link: 'templateform', icon: 'fa-snapchat-ghost' },
                                     { name: 'Model Form', link: 'modelform', icon: 'fa-snapchat-ghost' },
                                     { name: 'Model Builder Form', link: 'mbuilderform', icon: 'fa-snapchat-ghost' },
+                                    { name: 'New Record Form', link: 'newrecord', icon: 'fa-snapchat-ghost' },
                                 ], navgroups: [],
                             },
                             {

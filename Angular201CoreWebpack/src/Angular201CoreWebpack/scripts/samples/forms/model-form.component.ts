@@ -1,5 +1,6 @@
 ﻿import { Component } from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {StartsWithValidator} from '../../common/validators/starts-with.validator.directive'; // the function not the directive
 
 @Component({
     selector: 'model-form',
@@ -13,7 +14,7 @@ export class ModelDrivenFormComponent
     constructor() { }
 
     userForm = new FormGroup({
-        name: new FormControl('Chris', Validators.required),
+        name: new FormControl('Chris', [Validators.required, StartsWithValidator]),
         email: new FormControl('Chris@Email.com', [Validators.required, Validators.minLength(4)]),
         address: new FormGroup({
             street: new FormControl(),
