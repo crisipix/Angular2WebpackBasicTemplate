@@ -305,3 +305,326 @@ export class DashboardContainerComponent implements OnInit {
 
 
 //////////////////////////////////
+
+﻿import {Component, ComponentRef, Input, ViewContainerRef, QueryList, ViewChildren, ViewChild, OnInit} from '@angular/core'
+//import { Dragula, DragulaService } from 'ng2-dragula/ng2-dragula';
+
+import {NewsComponent} from '../widgets/news.component';
+import { TestWidgetComponent } from '../widgets/test-widget.component';
+
+
+import {DashBoardUpdateWidgetService} from './services/dashboard-update.service';
+import {WidgetComponent} from './dashboard-widget';
+import {BaseWidget, IWidget} from './basewidget.component';
+
+
+@Component({
+    selector: 'widget-factory',
+    //directives: [WidgetComponent //,Dragula
+    //],
+    //class="flex-container" [dragula]='"dashboard-bag"'
+    template: `
+  <div *ngFor="let widgetType of widgetTypes; let i = index" class="flex-item">
+    <widget [type]="widgetType.type" [id]=i [config]="widgetType.config" [filter]="filter"></widget>
+  </div>
+`,
+    styleUrls: ['./styles/dashboard/dashboard.css'],
+    //viewProviders: [DragulaService]
+
+})
+export class DashBoardFactoryComponent implements OnInit {
+    @Input() types: Array<any>;
+    @Input() filter: string;
+    widgetTypes: Array<any>;
+    //  widgetType: any;
+    //@ViewChild(WidgetResolver);
+    //widgetResolver: WidgetResolver;
+
+    //@ViewChildren(WidgetResolver)
+    //widgets: QueryList<WidgetResolver>;
+    ngAfterContentInit() {
+
+
+    }
+    constructor(private _widgetUpdateService: DashBoardUpdateWidgetService) {
+        this.widgetTypes = [];
+    }
+
+    ngOnInit() {
+        //this.widgetTypes = [NewsComponent, NewsComponent, TestWidgetComponent]; 
+        for (let item in this.types) {
+            this.widgetTypes.push({ type: this.FindType(this.types[item].type), config : this.types[item].config});
+        }
+
+        this._widgetUpdateService.updateEvent.subscribe(data => { this.update(); });
+        this._widgetUpdateService.popEvent.subscribe(data => { this.pop(); });
+    }
+
+    FindType(type: string): any {
+        console.log('finding type');
+        switch (type) {
+            case 'news':
+                return NewsComponent;
+            default:
+                return TestWidgetComponent;
+        }
+    }
+    pop() {
+        //this.widgetTypes.push(this.FindType(this.types[this.types.length - 1].type));
+        this.widgetTypes.pop();
+    }
+
+    update() {
+        //this.widgetTypes.push(this.FindType(this.types[this.types.length - 1].type));
+        this.widgetTypes.push({ type: this.FindType(this.types[this.types.length - 1].type), config: this.types[this.types.length - 1].config });
+    }
+}
+
+
+/////////////////////////////////////////////
+
+﻿import {
+    Component, ComponentRef, ComponentFactory,
+    Input, Output, EventEmitter, ViewContainerRef, ComponentFactoryResolver, ChangeDetectorRef,
+    QueryList, ViewChildren, ViewChild, OnInit
+} from '@angular/core'
+import {DashBoardWidgetService} from './services/dashboard-widget.service';
+import {DashBoardUpdateWidgetService} from './services/dashboard-update.service';
+
+import {BaseWidget, IWidget} from './basewidget.component';
+
+@Component({
+    selector: 'widget-resolver',
+    template: `<div #widgettemplate></div>`,
+    providers: [DashBoardWidgetService],
+
+})
+export class WidgetResolver implements IWidget {
+    @ViewChild('widgettemplate', { read: ViewContainerRef }) widget;
+    @Input() type;
+    @Input() config: any;
+    @Input() filter: string;
+
+    @Output() onRefreshCompletedEvent = new EventEmitter<any>();
+    name: string = 'Widget';
+    canRefresh: boolean;
+    canConfigure: boolean;
+    canClose: boolean;
+ 
+    compRef: ComponentRef<any>;
+    private isViewInitialized: boolean = false;
+
+    constructor(private _compiler: ComponentFactoryResolver,
+        private _widgetService: DashBoardWidgetService,
+        private _chRef: ChangeDetectorRef) {
+        this.canRefresh = false;
+        this.canConfigure = false;
+        this.canClose = false;
+        this.config = {};
+    }
+
+    updateComponent() {
+        console.log('creating type');
+        //console.log(this.type);
+        if (!this.isViewInitialized) { return; }
+
+        if (this.compRef) { this.compRef.destroy(); }
+
+        this._widgetService.refreshCompletedEvent.subscribe(data => { this.refreshCompleted(); });
+
+        let componentFactory = this._compiler.resolveComponentFactory(this.type);
+        this.compRef = this.widget.createComponent(componentFactory);
+        this.compRef.instance.input = "";
+        this.compRef.instance.config = this.config;
+        this.compRef.instance.filter = this.filter;
+        this.canRefresh = this.compRef.instance.canRefresh;
+        this.canConfigure = this.compRef.instance.canConfigure;
+        this.canClose = this.compRef.instance.canClose;
+
+        console.log('WidgetResolver this.canRefresh' + this.type);
+        console.log(this.canRefresh);
+
+        //look for changes after this, only if the item was created after the set of parents. 
+        // hack and you dont' want to call change detect multiple times. 
+        //this._chRef.detectChanges();
+    }
+
+    /*
+        Only want to update the inputs and config when there is a change.
+        Want to prevent recreating the whole widget it will degrade performance and
+        isn't usually necessary. 
+    */
+    updateComponentOnChange() {
+        console.log('updating type');
+        if (!this.isViewInitialized) { return; }
+
+        if (!this.compRef) { return; }
+        this.compRef.instance.config = this.config;
+        this.compRef.instance.filter = this.filter;
+    }
+
+    ngOnChanges() {
+        console.log('creating on change');
+
+        //this.updateComponent();
+        this.updateComponentOnChange();
+    }
+
+    ngAfterViewInit() {
+        console.log('creating on view init');
+        this.isViewInitialized = true;
+
+        // call this along with change detection in update component method
+        //this.updateComponent();
+
+        // very odd hack...
+        setTimeout(() => { this.updateComponent(); },0);
+
+    }
+
+    ngAfterContentInit() {
+        console.log('creating on Contenty init');
+        //this.updateComponent();
+    }
+
+    ngOnDestroy() {
+        if (this.compRef) { this.compRef.destroy(); }
+    }
+
+    refresh() {
+        this._widgetService.refresh();
+    }
+
+    refreshCompleted() {
+        this.onRefreshCompletedEvent.emit('');
+    }
+
+    configure() {
+        this._widgetService.configure();
+    }
+
+    close() {
+        //this._widgetService.close();
+    }
+}
+
+@Component({
+    selector: 'widget',
+    //directives: [WidgetResolver],
+    template: `
+    <div class="panel panel-primary">
+      <div class="panel-heading draggable">
+        {{name}}
+          <i *ngIf="canConfigure " class="fa fa-gear icon-large pull-right selectable" (click)="configure()"></i>
+          <i *ngIf="canRefresh && !showSpinner" class="fa fa-refresh icon-large pull-right selectable" (click)="refresh()"></i>
+          <i *ngIf="showSpinner" class="fa fa-refresh fa-spin icon-large fa-fw pull-right"></i> 
+        </div>
+        <div class="panel">
+            <widget-resolver [type]="type" [config]="config" [filter]="filter" (onRefreshCompletedEvent)="refreshCompleted($event)"></widget-resolver>
+        </div>
+     </div>
+    `,
+    styles: [`.selectable { cursor: pointer; } .draggable { cursor:move;} .icon-large{font-size:22px;}`]
+})
+export class WidgetComponent implements OnInit, IWidget {
+    @Input() type: any;
+    @Input() config: any;
+    @Input() id: number;
+    @Input() filter: string;
+
+    
+    @ViewChild(WidgetResolver) viewChild: WidgetResolver;
+    @ViewChildren(WidgetResolver)
+    widgets: QueryList<WidgetResolver>;
+    currentWidget: WidgetResolver;
+    name: string = 'Widget';
+    canRefresh: boolean = false;
+    canConfigure: boolean = false;
+    canClose: boolean = false;
+    isViewInitialized: boolean;
+    isViewChecked: boolean;
+    showSpinner: boolean;
+    constructor(private _chRef : ChangeDetectorRef) {
+        this.config = {};
+    }
+
+    ngOnInit() {
+        console.log('WidgetComponent on init');
+
+    }
+
+    ngAfterViewInit() {
+        // available here
+        this.isViewInitialized = true;
+
+        let widgetArray = this.widgets.toArray();
+
+        this.currentWidget = widgetArray[0];
+
+        if (this.currentWidget === this.viewChild) {
+            console.log('what im looking for already exists. ');
+        }
+
+        console.log('WidgetComponent updating on ngAfterViewInit');
+
+        // call this along with change detection in update component method
+        //this.updateComponent();
+        
+        // very odd hack...
+        setTimeout(() => { this.updateComponent(); }, 0);
+
+        console.log('skip?');
+    }
+
+    //ngAfterViewChecked() {
+    //    console.log('WidgetComponent updating on ngAfterViewChecked');
+    //    this.isViewChecked = true;
+    //    this.updateComponent();
+    //}
+
+    updateComponent() {
+        if (!this.isViewInitialized) { return; }
+
+        if (this.currentWidget) {
+            this.name = this.config.name || 'Widget';
+            this.canRefresh = this.currentWidget.canRefresh;
+            console.log('WidgetComponent this.canRefresh');
+            console.log(this.canRefresh);
+            this.canConfigure = this.currentWidget.canConfigure;
+
+            //look for changes after this, only if the item was created after the set of parents. 
+            // hack and you dont' want to call change detect multiple times. 
+            //this._chRef.detectChanges();
+        }
+    }
+    configure() {
+        if (this.currentWidget && this.canConfigure) {
+            this.currentWidget.configure();
+        }
+    }
+
+    refreshAll() {
+        this.refresh();
+    }
+
+    refresh() {
+        if (this.currentWidget) {
+            this.currentWidget.refresh();
+            this.showSpinner = true;
+        }
+    }
+
+    refreshCompleted() {
+        if (this.currentWidget) {
+            this.showSpinner = false;
+        }
+    }
+
+    close() {
+        if (this.currentWidget) {
+            this.currentWidget.close();
+        }
+    }
+}
+
+
