@@ -203,3 +203,105 @@ export interface IWidget {
 
 
 //////////////////////////////
+
+
+﻿import {Component, OnInit, Input, Output} from '@angular/core';
+ //import { Dragula, DragulaService } from 'ng2-dragula/ng2-dragula';
+ import { DragulaService } from 'ng2-dragula/ng2-dragula';
+
+import {DashBoardUpdateWidgetService} from './services/dashboard-update.service';
+import {DashBoardFactoryComponent} from './dashboard-factory.component';
+
+/*
+    Wrapper for the dashboard configure the number of widgets and types here.
+    then pass it off to the Factory to decide on the type of component to generate.
+    for each type given to the factor it'll pass the type to the widget which will resolve it's
+    body as the 'widget-resolver container. the widget shell is just a shell.
+    Container -> Factory ---->>> Widgets
+*/
+@Component({
+    selector: 'dashboard-app',
+   // directives: [DashBoardFactoryComponent, Dragula],
+    //<button type="button" (click)="addTop()" class="btn btn-default">+</button>
+    //<button type="button" (click)="popTop()" class="btn btn-default">-</button>
+    //
+    providers: [DashBoardUpdateWidgetService, DragulaService],
+    template: `   
+    <div class="panel-heading">
+                    <div style="text-align:left; ">
+                        <strong style="font-size:20px;">Portfolio</strong>
+                        <strong>{{currentPortfolio}}</strong> | 
+                        <strong> {{asOfDate}}</strong>
+                        <i class="pull-left fa fa-gear icon-large selectable" (click)="smModal.show()"></i>
+                        <i class="pull-left fa fa-plus icon-large selectable" (click)="addTop()"></i>
+                        <i class="pull-left fa fa-minus icon-large selectable" (click)="popTop()"></i>
+                        <i class="pull-left fa fa-search icon-large selectable" (click)="toggleFilterTicker()"></i>
+                    </div>
+                    <div *ngIf="showFilter">
+                        <search-box [filter]="filter" (update)="filter=$event" (toggleFilter)="toggleFilterTicker()"></search-box>
+                    </div>
+    </div>
+   <widget-factory [types]="typeInfo" class="flex-container" [dragula]='"dashboard-bag"' [filter]="filter"></widget-factory>
+`,
+    styleUrls: ['./styles/dashboard/dashboard.css'],
+   // viewProviders: [DragulaService]
+})
+export class DashboardContainerComponent implements OnInit {
+    /*
+        Add inputs and outputs to call the functions. 
+    */
+    currentPortfolio: string;
+    asOfDate: string;
+    showFilter: boolean;
+    filter: string;
+
+    // this is an example of how the user setting will come back for the database. and how it'll be stored. 
+    // types decorated with other information such as pre-defined information. 
+    // create a type class 
+    typeInfo = [];
+    
+    public constructor(
+        private _widgetUpdateService: DashBoardUpdateWidgetService,
+        private _dragulaService: DragulaService) {
+        _dragulaService.setOptions('dashboard-bag', {
+            moves: this.canMove
+        });
+
+            this.currentPortfolio = 'JELL';
+            this.asOfDate = '03/20/2017';
+    }
+
+    ngOnInit() {
+        this.typeInfo = [
+            { type: 'news', config: { symbol: 'C', name: 'News' } },
+            { type: 'dunno', config: { name: 'Idea Tracker Widget' } }
+        ];
+    }
+
+    public canMove(el, container, handle) {
+        //console.log(handle.className);
+        //console.log(handle.className.endsWith('draggable'));
+        let result = handle.className.indexOf('draggable') > 0;
+        return result;
+    }
+
+    addTop() {
+        //console.log(this.types);
+      
+        this.typeInfo.push({ type: 'dunno', config: { name: 'Idea Tracker Widget X'} });
+        //console.log(this.types);
+
+        this._widgetUpdateService.update();
+    }
+
+    popTop() {
+        this._widgetUpdateService.pop();
+    }
+
+    toggleFilterTicker() {
+        this.showFilter = !this.showFilter;
+    }
+}
+
+
+//////////////////////////////////
