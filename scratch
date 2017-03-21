@@ -1,0 +1,205 @@
+import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
+
+import { CommonModule } from '@angular/common';
+import { ModalModule } from 'ng2-bootstrap';
+import { DragulaModule } from 'ng2-dragula/ng2-dragula';
+import { AppCommonModule } from '../../../common/common.module';
+
+
+
+
+// Services
+import { DashBoardWidgetService } from '../services/dashboard-widget.service';
+import { DashBoardUpdateWidgetService } from '../services/dashboard-update.service';
+
+// Models
+import { BaseWidget } from '../basewidget.component';
+import { IWidget } from '../basewidget.component';
+
+// Main Components
+import { DashboardContainerComponent } from '../dashboard-container.component';
+import { StaticDashboardContainerComponent } from '../static-dashboard-container.component';
+
+import { DashBoardFactoryComponent } from '../dashboard-factory.component';
+import { WidgetResolver } from '../dashboard-widget';
+import { WidgetComponent } from '../dashboard-widget';
+
+// Widgets
+import { NewsComponent } from '../../widgets/news.component';
+import { TestWidgetComponent } from '../../widgets/test-widget.component';
+import { WidgetService } from '../../widgets/services/widget.service';
+
+
+
+@NgModule({
+    imports: [
+        CommonModule,
+        HttpModule,
+        ModalModule.forRoot(),
+        DragulaModule,
+        AppCommonModule
+    ],
+    declarations: [
+        DashboardContainerComponent,
+        StaticDashboardContainerComponent,
+        DashBoardFactoryComponent,
+        WidgetResolver,
+        WidgetComponent,
+        TestWidgetComponent,
+        NewsComponent
+        
+        
+    ],
+    exports: [
+        DashboardContainerComponent,
+        StaticDashboardContainerComponent,
+        DashBoardFactoryComponent,
+        WidgetResolver,
+        WidgetComponent,
+        TestWidgetComponent,
+        NewsComponent,
+       
+        
+    ],
+    providers: [DashBoardWidgetService, DashBoardUpdateWidgetService, WidgetService],
+    entryComponents: [
+        TestWidgetComponent,
+        NewsComponent,
+        IdeaUpdatesComponent
+       
+        ]
+
+})
+
+export class CommonDashboardModule {
+
+
+}
+
+
+
+
+////////////////////////////
+﻿import {Injectable, EventEmitter} from '@angular/core';
+
+@Injectable()
+export class DashBoardUpdateWidgetService {
+    updateEvent: EventEmitter<any>;
+    popEvent: EventEmitter<any>;
+    model: Array<any>;
+
+    constructor() {
+
+        this.updateEvent = new EventEmitter();
+        this.popEvent = new EventEmitter();
+        
+        this.model = [];
+    }
+
+    update() {
+        this.updateEvent.emit('');
+    }
+
+    pop() {
+        this.popEvent.emit('');
+    }
+
+}
+
+
+////////////////////////////
+﻿import {Injectable, EventEmitter} from '@angular/core';
+
+@Injectable()
+export class DashBoardWidgetService {
+    saveChanges: EventEmitter<any>;
+    refreshEvent: EventEmitter<any>;
+    refreshCompletedEvent: EventEmitter<any>;
+    configureEvent: EventEmitter<any>;
+    model: Array<any>;
+
+    constructor() {
+        this.saveChanges = new EventEmitter();
+        this.refreshEvent = new EventEmitter();
+        this.refreshCompletedEvent = new EventEmitter();
+        this.configureEvent = new EventEmitter();
+        this.model = [];
+    }
+
+    saveModel() {
+        console.log('emitting save');
+        this.saveChanges.emit(this.model);
+    }
+
+    getModel() {
+        return this.model;
+    }
+    //onSaveChanges(value) {
+    //    this.model.push(value);
+    //}
+
+    refresh() {
+        this.refreshEvent.emit('');
+    }
+
+    onRefreshCompleted() {
+        this.refreshCompletedEvent.emit('');
+    }
+
+    configure() {
+        this.configureEvent.emit('');
+    }
+}
+
+
+//////////////////
+﻿import {DashBoardWidgetService} from './services/dashboard-widget.service';
+
+export class BaseWidget {
+    name: string = 'Widget';
+    config: any;
+    filter: string;
+
+    canRefresh: boolean;
+    canClose: boolean;
+    canConfigure: boolean;
+
+    constructor(canRefresh: boolean, canClose: boolean, canConfigure: boolean, private _widgetService: DashBoardWidgetService) {
+        this.canRefresh = canRefresh;
+        this.canClose = canClose;
+        this.canConfigure = canConfigure;
+
+        // have all Widgets that extend this class subscribe to the injected widget service. 
+        // each instance of the widget should have their own service instance. 
+        this._widgetService.refreshEvent.subscribe(data => { this.refresh(); });
+        this._widgetService.configureEvent.subscribe(data => { this.configure(); });
+        this.config = {};
+    }
+
+    refresh() { }
+    refreshCompleted() { this._widgetService.onRefreshCompleted(); }
+    configure() { }
+    close() { }
+
+}
+
+export interface IWidget {
+    name: string;
+    config: string;
+    filter: string;
+
+    canRefresh: boolean;
+    canClose: boolean;
+    canConfigure: boolean;
+
+    refresh(): void;
+    refreshCompleted(): void;
+    configure(): void;
+    close(): void;
+}
+
+
+
+
+//////////////////////////////
