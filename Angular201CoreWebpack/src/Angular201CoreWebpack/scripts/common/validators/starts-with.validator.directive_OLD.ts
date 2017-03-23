@@ -2,7 +2,7 @@
 // class is good for module driven forms. 
 // directives are good for template forms. 
 import {AbstractControl} from '@angular/forms';
-import {ValidationResult} from './validator.result.ts';
+import {ValidationResult} from './validator.result';
 
 import {Directive} from '@angular/core';
 import {NG_VALIDATORS} from '@angular/forms';
