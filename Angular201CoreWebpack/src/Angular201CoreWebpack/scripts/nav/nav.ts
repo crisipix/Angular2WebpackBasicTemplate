@@ -5,11 +5,11 @@
     linkType: string;
     isSelected: boolean;
 
-    constructor(name, link, icon = '') {
+    constructor(name, link, icon = '', selected) {
         this.name = name;
         this.link = link;
         this.icon = icon;
-        this.isSelected = false;
+        this.isSelected = selected;
     }
 
     select() {

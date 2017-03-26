@@ -16,7 +16,7 @@ import {ThirdPartyModule} from './samples/thirdparty/module/thirdparty.module';
 import {HttpCallModule} from './samples/httpcall/module/httpcall.module';
 import { SearchFilterModule } from './samples/searchfilter/module/searchfilter.module';
 import { UserModule } from './user/user.module';
-
+import { CommonRoutingModule } from './routing/module/common.routing.module';
 
 import {MatchingTagsPipe} from './tagging/pipe/match-tag.pipe';
 import {TaggingComponent} from './tagging/tagging.component';
@@ -37,6 +37,8 @@ import {TaggingComponent} from './tagging/tagging.component';
         ThirdPartyModule,
         HttpCallModule,
         SearchFilterModule,
+        CommonRoutingModule,
+
         AppRoutingModule 
     ],
         

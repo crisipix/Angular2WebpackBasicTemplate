@@ -1,5 +1,5 @@
 ﻿import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import { Http } from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
 import 'rxjs/add/operator/map';
@@ -56,9 +56,9 @@ export class NavService
             left: [{
                 name: 'Root', navs:
                 [
-                    { name: 'Home', link: 'tagging' },
+                    { name: 'Home', link: 'tagging', isSelected: true},
                     { name: 'Tree', link: 'tree' },
-                    { name: 'Dashboard', link: 'tagging' },
+                    { name: 'Dashboard', link: 'dashboard' },
                 ],
                 navgroups: [
                     {
@@ -76,6 +76,14 @@ export class NavService
                                 {
                                     name: 'Search Pipes', navs: [
                                         { name: 'Search Filter', link: 'searchfilter' },
+                                    ], navgroups: [],
+                                },
+                                {
+                                    name: 'Auth', navs: [
+                                        { name: 'Page Not Found', link: '404' },
+                                        { name: 'Not Authorized', link: 'forbidden' },
+                                        { name: 'Not Authenticated', link: 'login' },
+                                        { name: 'Not Authorized Tree', link: 'tree403' },
                                     ], navgroups: [],
                                 },
                             ]

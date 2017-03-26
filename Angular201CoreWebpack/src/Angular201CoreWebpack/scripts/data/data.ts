@@ -4,6 +4,8 @@ export function generateUser() {
     let user = new User();
     user.username = 'Chris';
     user.entitlements = generateEntitlements();
+
+    return user;
 }
 
 export function generateEntitlements() {

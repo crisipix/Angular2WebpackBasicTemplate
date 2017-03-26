@@ -1,6 +1,6 @@
 ﻿import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-
+//import { CommonRoutingModule } from './routing/module/common.routing.module';
 
 
 import {MatchingTagsPipe} from './tagging/pipe/match-tag.pipe';
@@ -17,12 +17,18 @@ import {HandsonComponent} from './samples/thirdparty/handson.component';
 import {Ng2BootstrapComponent } from './samples/thirdparty/ng2bootstrap.component';
 import {DragulaComponent} from './samples/thirdparty/dragula.component';
 import {HttpCallComponent} from './samples/httpcall/httpcall.component';
-import {SearchFilterComponent} from './samples/searchfilter/searchfilter.component';
+import { SearchFilterComponent } from './samples/searchfilter/searchfilter.component';
+import { AuthGuard } from './routing/services/auth-guard';
+// Routing
+import { NotFoundComponent } from './routing/notfound.component';
+import { UnAuthenticatedComponent } from './routing/unauthenticated.component';
+import { UnAuthorizedComponent } from './routing/unauthorized.component';
 
 const routes: Routes = [
         { path: '', redirectTo: 'tagging', pathMatch: 'full' },
         { path: 'tagging', component: TaggingComponent },
-        { path: 'tree', component: TreeRootComponent },
+        { path: 'tree', component: TreeRootComponent, canActivate: [AuthGuard] },
+        { path: 'tree403', component: TreeRootComponent, canActivate: [AuthGuard] },
         { path: 'templateform', component: TemplateFormComponent },
         { path: 'modelform', component: ModelDrivenFormComponent },
         { path: 'mbuilderform', component: ModelBuilderFormComponent },
@@ -33,7 +39,6 @@ const routes: Routes = [
         { path: 'dragula', component: DragulaComponent },
         { path: 'httpcall', component: HttpCallComponent },
         { path: 'searchfilter', component: SearchFilterComponent },
-
         {
             path: 'parentchild', component: ParentComponent,
             children: [
@@ -42,6 +47,9 @@ const routes: Routes = [
                 { path: 'right', component: SharedRightComponent } // url: parentchild/right
             ]
         },
+        { path: 'login', component: UnAuthenticatedComponent },
+        { path: 'forbidden', component: UnAuthorizedComponent },
+        { path: '**', component: NotFoundComponent },
 
     
 ];
