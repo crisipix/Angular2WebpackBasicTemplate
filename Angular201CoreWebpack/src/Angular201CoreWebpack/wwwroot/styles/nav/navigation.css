@@ -40,6 +40,9 @@
     /*padding-top:30px;*/
     z-index: 1000;
     position:fixed;
+    /* Allows for the scroll when the components overflow*/
+    height: 100%;
+    overflow: auto;
 }
 
 .nav-menu-area .li:hover {
