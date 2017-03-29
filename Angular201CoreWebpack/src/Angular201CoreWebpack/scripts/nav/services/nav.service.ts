@@ -76,6 +76,7 @@ export class NavService
                                 {
                                     name: 'Search Pipes', navs: [
                                         { name: 'Search Filter', link: 'searchfilter' },
+                                        { name: 'Highlight Search Filter', link: 'highlightfilter'}
                                     ], navgroups: [],
                                 },
                                 {

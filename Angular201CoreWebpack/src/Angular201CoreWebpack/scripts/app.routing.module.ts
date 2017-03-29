@@ -18,6 +18,7 @@ import {Ng2BootstrapComponent } from './samples/thirdparty/ng2bootstrap.componen
 import {DragulaComponent} from './samples/thirdparty/dragula.component';
 import {HttpCallComponent} from './samples/httpcall/httpcall.component';
 import { SearchFilterComponent } from './samples/searchfilter/searchfilter.component';
+import { HighlightSearchComponent } from './samples/searchfilter/highlight-search.component';
 import { AuthGuard } from './routing/services/auth-guard';
 // Routing
 import { NotFoundComponent } from './routing/notfound.component';
@@ -39,6 +40,7 @@ const routes: Routes = [
         { path: 'dragula', component: DragulaComponent },
         { path: 'httpcall', component: HttpCallComponent },
         { path: 'searchfilter', component: SearchFilterComponent },
+        { path: 'highlightfilter', component: HighlightSearchComponent },
         {
             path: 'parentchild', component: ParentComponent,
             children: [
