@@ -1,0 +1,46 @@
+.spin {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    
+    opacity: 0.2;
+    z-index: 500;
+}
+
+.spin-background {
+    /*background: blue;*/
+    background: grey;
+}
+
+.center {
+    font-size: 40px;
+    margin: 0;
+    /*background: yellow;*/
+    position: absolute;
+    /*top: 50%;*/
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+.top-quarter {
+    top: 25%;
+}
+
+.top-center {
+    top: 50%;
+}
+
+/*.center {
+    position: relative;
+    top: 25%;
+    -webkit-transform: translateY(-25%);
+    -ms-transform: translateY(-25%);
+    transform: translateY(-25%);
+    left: 45%;
+    font-size: 100px;
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 100%;
+  }*/
