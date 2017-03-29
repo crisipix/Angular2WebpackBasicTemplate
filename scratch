@@ -1,3 +1,5 @@
+//http://stackoverflow.com/questions/39907458/angular-2-highlight-text-of-a-div-as-user-types-characters-in-an-input-field
+
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
