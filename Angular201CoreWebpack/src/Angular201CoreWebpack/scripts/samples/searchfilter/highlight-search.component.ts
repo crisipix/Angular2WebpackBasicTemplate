@@ -3,9 +3,8 @@
 @Component({
     selector: 'search-test',
     templateUrl: './views/samples/searchfilter/highlight-search.component.html',
-    styles: [` .highlight {
-      background-color: yellow;
-    }`]
+    styles: [`.highlight { background-color:yellow;}`]
+
 })
 export class HighlightSearchComponent{
     records: Array<any>;

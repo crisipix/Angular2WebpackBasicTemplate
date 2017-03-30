@@ -9,14 +9,15 @@ import {CustomPipeModule} from '../../../common/pipes/module/custom-pipe.module'
 
 import { SearchFilterComponent } from '../searchfilter.component';
 import { HighlightSearchComponent } from '../highlight-search.component';
+import { HightlightSampleComponent } from '../highlight-sample.component';
 @NgModule({
     imports: [CommonModule,
         FormsModule,
         AlertModule,
         CustomPipeModule
     ],
-    declarations: [SearchFilterComponent, HighlightSearchComponent],
-    exports: [SearchFilterComponent, HighlightSearchComponent],
+    declarations: [SearchFilterComponent, HighlightSearchComponent, HightlightSampleComponent],
+    exports: [SearchFilterComponent, HighlightSearchComponent, HightlightSampleComponent],
     providers: []
 })
 

@@ -11,7 +11,7 @@
     selector: 'search-box',
     template: `
   <div class="input-group">
-        <input #inputFilter type="text" class="form-control" name="inputFilter" [(ngModel)]="filter" placeholder="Filter" (input)="update.emit(inputFilter.value)">
+        <input #inputFilter type="text" class="form-control" name="inputFilter" [(ngModel)]="filter" placeholder="Filter" (ngModelChange)="update.emit(inputFilter.value)">
         <span class="input-group-btn">
             <button class="btn btn-default" (click)="toggleFilterIdeas()"><i class="fa fa-chevron-up fa"></i></button>
         </span>

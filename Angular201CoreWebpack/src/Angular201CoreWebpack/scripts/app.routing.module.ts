@@ -19,6 +19,7 @@ import {DragulaComponent} from './samples/thirdparty/dragula.component';
 import {HttpCallComponent} from './samples/httpcall/httpcall.component';
 import { SearchFilterComponent } from './samples/searchfilter/searchfilter.component';
 import { HighlightSearchComponent } from './samples/searchfilter/highlight-search.component';
+import { HightlightSampleComponent } from './samples/searchfilter/highlight-sample.component';
 import { AuthGuard } from './routing/services/auth-guard';
 // Routing
 import { NotFoundComponent } from './routing/notfound.component';
@@ -41,6 +42,7 @@ const routes: Routes = [
         { path: 'httpcall', component: HttpCallComponent },
         { path: 'searchfilter', component: SearchFilterComponent },
         { path: 'highlightfilter', component: HighlightSearchComponent },
+        { path: 'highlightsample', component: HightlightSampleComponent },
         {
             path: 'parentchild', component: ParentComponent,
             children: [

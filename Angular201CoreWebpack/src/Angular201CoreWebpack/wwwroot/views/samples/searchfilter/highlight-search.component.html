@@ -10,8 +10,9 @@
             <li *ngFor="let record of records | search:filter">
                 <span highlight-search [search]="filter" [text]="record.desc" classToApply="highlight">
                     {{ record | json}}
-                    {{record.desc}}
+                    {{record.desc}}     
                 </span>
+              
             </li>
         </ul>
     </div>
