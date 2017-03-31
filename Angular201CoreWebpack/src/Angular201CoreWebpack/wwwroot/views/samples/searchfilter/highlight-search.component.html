@@ -3,17 +3,21 @@
         <h3>Search Filter Test</h3>
         <button class="btn btn-primary" (click)="toggleFilter()">Search</button>
         <div *ngIf="showFilter">
-            <search-box (update)="filter=$event" (toggleFilter)="toggleFilter()"></search-box>
+            <search-box (update)="onFilterChanged($event)" (toggleFilter)="toggleFilter()"></search-box>
         </div>
-        
         <ul>
             <li *ngFor="let record of records | search:filter">
                 <span highlight-search [search]="filter" [text]="record.desc" classToApply="highlight">
                     {{ record | json}}
-                    {{record.desc}}     
+                    {{record.desc}}
                 </span>
-              
+                <div [innerHTML]="hilite(record.desc)"></div>
             </li>
         </ul>
+        <input type="text" name="searchString" [(ngModel)] ="searchString" (ngModelChange)="onInputChange()"/>
+        <div [innerHTML]="testString"></div>
+
+        <!--<span highlight-search [search]="searchString" [text]="testString" classToApply="highlight"></span>-->
+
     </div>
 </div>

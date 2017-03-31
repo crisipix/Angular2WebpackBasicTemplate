@@ -11,7 +11,7 @@
 export class HightlightSampleComponent {
     allText: string = 'lorem ipsum ...';
     text: string = '';
-    highlighted: string = '';
+    highlighted: string = 'lorem ipsum ...';
 
     updateHighlight() {
         this.highlighted = this.text ?
