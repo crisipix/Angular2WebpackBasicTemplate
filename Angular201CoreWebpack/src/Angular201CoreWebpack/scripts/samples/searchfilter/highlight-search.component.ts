@@ -1,4 +1,5 @@
 ﻿import { Component } from '@angular/core';
+import { escapeStringRegexp } from '../../common/pipes/directives/highlight-directive';
 
 @Component({
     selector: 'search-test',
@@ -10,8 +11,8 @@ export class HighlightSearchComponent{
     records: Array<any>;
     showFilter: boolean;
     filter: string;
-    testString: string = 'Apple Boy Cat Dog ';
-    originalString: string = 'Apple Boy Cat Dog ';
+    testString: string = 'Apple Boy Cat Dog There //is a wal{rus} ';
+    originalString: string = 'Apple Boy Cat Dog There //is a wal{rus} ';
     searchString: string = 'y Cat';
     constructor() {
         this.records = [
@@ -34,8 +35,14 @@ export class HighlightSearchComponent{
     }
 
     hilite(textblock) {
-        return this.filter ?
-            textblock.replace(new RegExp('(' + this.filter + ')', 'ig'), '<span class=highlight>$1</span>')
+        if (!textblock) { return textblock; }
+        if (!this.filter) { return textblock; }
+
+        let search = escapeStringRegexp(this.filter.toString());
+
+
+        return search ?
+            textblock.replace(new RegExp('(' + search + ')', 'ig'), '<span class=highlight>$1</span>')
             : textblock;
     }
 
