@@ -88,6 +88,11 @@ export class NavService
                                         { name: 'Not Authorized Tree', link: 'tree403' },
                                     ], navgroups: [],
                                 },
+                                {
+                                    name: 'Tables', navs: [
+                                        { name: 'Table Sort', link: 'tablesample' },
+                                    ], navgroups: [],
+                                }
                             ]
                     },
                     {
