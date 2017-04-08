@@ -22,15 +22,14 @@ export class GenericSort {
     sort(collection: Array<any>) {
 
         console.log("Before", collection);
-        let isNumeric = collection.reduce((acc, value) => { return Number.isNaN(value) && acc; }, true);
+        let isNumeric = collection.reduce((acc, curr) => { return acc && !Number.isNaN(curr) }, true);
 
         if (isNumeric) {
-            let nc = [...collection];
-            nc.sort((a, b) => {
-               
+            //let nc = [...collection];
+            collection.sort((a, b) => {
                 return a-b;
             });
-            collection = nc;
+            //collection = nc;
             console.log("After", collection);
             return;
         }

@@ -18,11 +18,12 @@ export class TableComponent {
 
     constructor(private gsort: GenericSort) {
 
-        this.numbers = new Array<any>([1, 3, 4, 57, 9, 11, 44, 2]);
+        this.numbers = new Array<any>();
+        this.numbers = [1, 3, 4, 57, 9, 11, 44, 2];
     }
 
     onSort() {
         this.gsort.sort(this.numbers);
-        this.numbers.sort((a, b) => { return a - b;})
+        //this.numbers.sort((a, b) => { return a - b;})
     }
 }
