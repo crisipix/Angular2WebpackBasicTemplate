@@ -3,7 +3,9 @@
   "name": "angular2webpack",
   "scripts": {
     "postinstall": "typings install",
-    "build": "webpack"
+    "build": "webpack",
+    "compodoc": " ./node_modules/.bin/compodoc ./scripts -p scripts/tsconfig.json -d docs",
+    "compodoc-s": "./node_modules/.bin/compodoc -s -d ./docs"
   },
   "dependencies": {
     "@angular/common": "~2.1.0",
@@ -30,15 +32,17 @@
     "ng2-handsontable": "0.48.0"
   },
   "devDependencies": {
-    "typescript": "^2.0.3",
-    "typings": "^1.4.0",
+    "@compodoc/compodoc": "^1.0.0-beta.7",
+    "@compodoc/gulp-compodoc": "0.0.4",
     "gulp": "^3.9.1",
-    "path": "^0.12.7",
     "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.0",
     "gulp-typescript": "^2.13.1",
-    "webpack-stream": "3.2.0",
+    "path": "^0.12.7",
+    "ts-loader": "^0.8.2",
+    "typescript": "^2.0.3",
+    "typings": "^1.4.0",
     "webpack-html-plugin": "0.1.1",
-    "ts-loader": "^0.8.2"
+    "webpack-stream": "3.2.0"
   }
 }

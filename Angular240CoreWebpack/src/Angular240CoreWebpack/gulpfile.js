@@ -3,6 +3,9 @@ var ts = require('gulp-typescript');
 var gulp = require('gulp');
 var clean = require('gulp-clean');
 var webpack = require('webpack-stream');
+
+var compodoc = require('@compodoc/gulp-compodoc');
+
 var destPath = './wwwroot/libs/';
 
 // Delete the dist directory
@@ -62,7 +65,14 @@ gulp.task('webpack_build_prod', function () {
    .pipe(webpack(require('./webpack.prod.config.js')))
    .pipe(gulp.dest('./wwwroot'));
 });
-
+gulp.task('documento', function () {
+    return gulp.src('scripts/**/*.ts')
+		.pipe(compodoc({
+		    output: 'documentation',
+		    tsconfig: 'scripts/tsconfig.json',
+		    serve: true
+		}))
+});
 var tsProject = ts.createProject('scripts/tsconfig.json');
 gulp.task('ts', function (done) {
     //var tsResult = tsProject.src()

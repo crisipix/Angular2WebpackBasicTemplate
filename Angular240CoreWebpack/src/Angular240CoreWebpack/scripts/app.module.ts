@@ -24,6 +24,7 @@ import { AlertModule } from 'ng2-bootstrap';
 import { SampleComponent } from './sample/sample.component';
 
 
+
 @NgModule({
     imports: [BrowserModule,
         //UserModule,
@@ -48,6 +49,7 @@ import { SampleComponent } from './sample/sample.component';
         
     declarations: [AppComponent, SampleComponent],//, TaggingComponent, MatchingTagsPipe ],
     bootstrap: [AppComponent]
+	
 })
 
 export class AppModule { }
