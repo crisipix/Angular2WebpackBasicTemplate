@@ -32,7 +32,6 @@
     "ng2-handsontable": "0.48.0"
   },
   "devDependencies": {
-    "@compodoc/compodoc": "^1.0.0-beta.7",
     "@compodoc/gulp-compodoc": "0.0.4",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",

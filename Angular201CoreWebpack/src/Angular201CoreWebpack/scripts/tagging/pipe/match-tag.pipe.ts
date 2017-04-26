@@ -5,7 +5,7 @@ import { Person } from '../models/person';
 import { Tag } from '../models/tag';
 
 @Pipe({ name: 'matchingTags' })
-@Injectable()
+//@Injectable()
 export class MatchingTagsPipe implements PipeTransform {
 
     transform(people: Array<Person>, tag: Tag, tagCache: any) {

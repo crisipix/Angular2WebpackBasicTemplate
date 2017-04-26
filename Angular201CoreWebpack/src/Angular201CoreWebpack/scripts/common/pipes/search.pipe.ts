@@ -8,7 +8,7 @@ import {Injectable, Pipe, PipeTransform } from '@angular/core';
     name: 'search',
     pure: false
 })
-@Injectable()
+//@Injectable()
 export class SearchFilterPipe implements PipeTransform {
     temp: Array<any> = [];
     transform(items: any[], args: string): any {
